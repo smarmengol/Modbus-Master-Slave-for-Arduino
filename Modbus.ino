@@ -1,3 +1,4 @@
+
 /**
  * @file
  * Arduino library for communicating with Modbus devices over RS232/485 (via RTU protocol).
@@ -16,7 +17,6 @@
 //#include <util/crc16.h>
 
 /* _____GLOBAL VARIABLES_____________________________________________________ */
-HardwareSerial port = Serial; ///< Pointer to Serial class object
 
 typedef struct {
   uint8_t u8id;
@@ -98,6 +98,7 @@ const unsigned char fctsupported[] = {
  */
 class Modbus {
 private:
+  HardwareSerial *port; ///< Pointer to Serial class object
   uint8_t u8id; // 0=master, 1..247=slave number
   uint8_t u8serno; // serial port: 0-Serial, 1..3-Serial1..Serial3
   uint8_t u8txenpin; // 0=USB or RS-232 mode, >0=RS-485 mode
@@ -194,36 +195,36 @@ void Modbus::begin(long u32speed) {
   switch( u8serno ) {
 #if defined(UBRR1H)
   case 1:
-    port = Serial1;
+    port = &Serial1;
     break;
 #endif
 
 #if defined(UBRR2H)
   case 2:
-    port = Serial2;
+    port = &Serial2;
     break;
 #endif
 
 #if defined(UBRR3H)
   case 3:
-    port = Serial3;
+    port = &Serial3;
     break;
 #endif
   case 0:
   default:
-    port = Serial;
+    port = &Serial;
     break;
   }
 
-  // port.begin(u32speed, u8config);
-  port.begin(u32speed);
+  // port->begin(u32speed, u8config);
+  port->begin(u32speed);
   if (u8txenpin > 1) { // pin 0 & pin 1 are reserved for RX/TX
     // return RS485 transceiver to transmit mode
     pinMode(u8txenpin, OUTPUT);
     digitalWrite(u8txenpin, LOW);
   }
 
-  port.flush();
+  port->flush();
   u8lastRec = u8BufferSize = 0;
   u16InCnt = u16OutCnt = u16errCnt = 0;
 }
@@ -387,7 +388,7 @@ int8_t Modbus::query( modbus_t telegram ) {
  */
 int8_t Modbus::poll() {
   // check if there is any incoming frame
-  uint8_t u8current = port.available();  
+  uint8_t u8current = port->available();  
 
   if (millis() > u32timeOut) {
     u8state = COM_IDLE;
@@ -460,7 +461,7 @@ int8_t Modbus::poll( uint16_t *regs, uint8_t u8size ) {
   u8regsize = u8size;
 
   // check if there is any incoming frame
-  uint8_t u8current = port.available();  
+  uint8_t u8current = port->available();  
   if (u8current == 0) return 0;
 
   // check T35 after frame end or still no frame end
@@ -536,8 +537,8 @@ int8_t Modbus::getRxBuffer() {
   if (u8txenpin > 1) digitalWrite( u8txenpin, LOW );
 
   u8BufferSize = 0;
-  while ( port.available() ) {
-    au8Buffer[ u8BufferSize ] = port.read();
+  while ( port->available() ) {
+    au8Buffer[ u8BufferSize ] = port->read();
     u8BufferSize ++;
 
     if (u8BufferSize >= MAX_BUFFER) bBuffOverflow = true;
@@ -595,7 +596,7 @@ void Modbus::sendTxBuffer() {
   }
 
   // transfer buffer to serial line
-  port.write( au8Buffer, u8BufferSize );
+  port->write( au8Buffer, u8BufferSize );
 
   // keep RS485 transceiver in transmit mode as long as sending
   if (u8txenpin > 1) {
@@ -626,7 +627,7 @@ void Modbus::sendTxBuffer() {
     // return RS485 transceiver to receive mode
     digitalWrite( u8txenpin, LOW );
   }
-  port.flush();
+  port->flush();
   u8BufferSize = 0;
 
   // set time-out for master
@@ -1019,4 +1020,3 @@ int8_t Modbus::process_FC16( uint16_t *regs, uint8_t u8size ) {
   sendTxBuffer();
   return u8BufferSize;
 }
-
