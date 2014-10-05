@@ -1,0 +1,30 @@
+#######################################
+# Syntax Coloring Map For Modbus-Master-Slave
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+modbus_t	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+begin		KEYWORD2
+poll		KEYWORD2
+getInCnt	KEYWORD2
+getOutCnt	KEYWORD2
+getErrCnt	KEYWORD2
+getID		KEYWORD2
+getState	KEYWORD2
+query		KEYWORD2
+setTimeOut	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+Modbus	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################

@@ -1,0 +1,75 @@
+\hypertarget{structmodbus__t}{\section{modbus\-\_\-t Struct Reference}
+\label{structmodbus__t}\index{modbus\-\_\-t@{modbus\-\_\-t}}
+}
+
+
+Master query structure\-: This includes all the necessary fields to make the Master generate a \hyperlink{class_modbus}{Modbus} query. A Master may keep several of these structures and send them cyclically or use them according to program needs.  
+
+
+
+
+{\ttfamily \#include $<$Modbus\-Rtu.\-h$>$}
+
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\-\_\-t \hyperlink{structmodbus__t_af78ad11f93e63022a1c279de7206358c}{u8id}
+\item 
+uint8\-\_\-t \hyperlink{structmodbus__t_a57d1630d4548e5d50d79e206a48b09bc}{u8fct}
+\item 
+uint16\-\_\-t \hyperlink{structmodbus__t_a224ead9ff72467696e94fba9cf06bd3c}{u16\-Reg\-Add}
+\item 
+uint16\-\_\-t \hyperlink{structmodbus__t_a5b9cee9c1a9415d927543f6cf054eb43}{u16\-Coils\-No}
+\item 
+uint16\-\_\-t $\ast$ \hyperlink{structmodbus__t_a36212dd6316cbffb8ea31b2a2f5ae1be}{au16reg}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Master query structure\-: This includes all the necessary fields to make the Master generate a \hyperlink{class_modbus}{Modbus} query. A Master may keep several of these structures and send them cyclically or use them according to program needs. 
+
+Definition at line 48 of file Modbus\-Rtu.\-h.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{structmodbus__t_a36212dd6316cbffb8ea31b2a2f5ae1be}{\index{modbus\-\_\-t@{modbus\-\_\-t}!au16reg@{au16reg}}
+\index{au16reg@{au16reg}!modbus_t@{modbus\-\_\-t}}
+\subsubsection[{au16reg}]{\setlength{\rightskip}{0pt plus 5cm}uint16\-\_\-t$\ast$ modbus\-\_\-t\-::au16reg}}\label{structmodbus__t_a36212dd6316cbffb8ea31b2a2f5ae1be}
+Pointer to memory image in master 
+
+Definition at line 53 of file Modbus\-Rtu.\-h.
+
+\hypertarget{structmodbus__t_a5b9cee9c1a9415d927543f6cf054eb43}{\index{modbus\-\_\-t@{modbus\-\_\-t}!u16\-Coils\-No@{u16\-Coils\-No}}
+\index{u16\-Coils\-No@{u16\-Coils\-No}!modbus_t@{modbus\-\_\-t}}
+\subsubsection[{u16\-Coils\-No}]{\setlength{\rightskip}{0pt plus 5cm}uint16\-\_\-t modbus\-\_\-t\-::u16\-Coils\-No}}\label{structmodbus__t_a5b9cee9c1a9415d927543f6cf054eb43}
+Number of coils or registers to access 
+
+Definition at line 52 of file Modbus\-Rtu.\-h.
+
+\hypertarget{structmodbus__t_a224ead9ff72467696e94fba9cf06bd3c}{\index{modbus\-\_\-t@{modbus\-\_\-t}!u16\-Reg\-Add@{u16\-Reg\-Add}}
+\index{u16\-Reg\-Add@{u16\-Reg\-Add}!modbus_t@{modbus\-\_\-t}}
+\subsubsection[{u16\-Reg\-Add}]{\setlength{\rightskip}{0pt plus 5cm}uint16\-\_\-t modbus\-\_\-t\-::u16\-Reg\-Add}}\label{structmodbus__t_a224ead9ff72467696e94fba9cf06bd3c}
+Address of the first register to access at slave/s 
+
+Definition at line 51 of file Modbus\-Rtu.\-h.
+
+\hypertarget{structmodbus__t_a57d1630d4548e5d50d79e206a48b09bc}{\index{modbus\-\_\-t@{modbus\-\_\-t}!u8fct@{u8fct}}
+\index{u8fct@{u8fct}!modbus_t@{modbus\-\_\-t}}
+\subsubsection[{u8fct}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t modbus\-\_\-t\-::u8fct}}\label{structmodbus__t_a57d1630d4548e5d50d79e206a48b09bc}
+Function code\-: 1, 2, 3, 4, 5, 6, 15 or 16 
+
+Definition at line 50 of file Modbus\-Rtu.\-h.
+
+\hypertarget{structmodbus__t_af78ad11f93e63022a1c279de7206358c}{\index{modbus\-\_\-t@{modbus\-\_\-t}!u8id@{u8id}}
+\index{u8id@{u8id}!modbus_t@{modbus\-\_\-t}}
+\subsubsection[{u8id}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t modbus\-\_\-t\-::u8id}}\label{structmodbus__t_af78ad11f93e63022a1c279de7206358c}
+Slave address between 1 and 247. 0 means broadcast 
+
+Definition at line 49 of file Modbus\-Rtu.\-h.
+
+
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_modbus_rtu_8h}{Modbus\-Rtu.\-h}\end{DoxyCompactItemize}

@@ -1,0 +1,130 @@
+\hypertarget{group__setup}{\section{Modbus Object Instantiation/\-Initialization}
+\label{group__setup}\index{Modbus Object Instantiation/\-Initialization@{Modbus Object Instantiation/\-Initialization}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__setup_ga101809cdd4734537bab58dc315a840b4}{Modbus\-::\-Modbus} ()
+\begin{DoxyCompactList}\small\item\em Default Constructor for Master through Serial. \end{DoxyCompactList}\item 
+void \hyperlink{group__setup_ga475a4fa0fac491307b10c4529ad6d2a0}{Modbus\-::begin} (long u32speed)
+\begin{DoxyCompactList}\small\item\em Initialize class object. \end{DoxyCompactList}\item 
+void \hyperlink{group__setup_ga9bd497e97ac1777d4f0d4171078d60e0}{Modbus\-::set\-I\-D} (uint8\-\_\-t u8id)
+\begin{DoxyCompactList}\small\item\em write new I\-D for the slave \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{group__setup_ga6449894306ff8cc5d4caff09b1b0d1ce}{Modbus\-::get\-I\-D} ()
+\begin{DoxyCompactList}\small\item\em get slave I\-D between 1 and 247 \end{DoxyCompactList}\item 
+void \hyperlink{group__setup_gaf828190ebe24efb1b3b1957429f3872e}{Modbus\-::set\-Time\-Out} (uint16\-\_\-t u16timeout)
+\begin{DoxyCompactList}\small\item\em write communication watch-\/dog timer \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Function Documentation}
+\hypertarget{group__setup_ga475a4fa0fac491307b10c4529ad6d2a0}{\index{Modbus Object Instantiation/\-Initialization@{Modbus Object Instantiation/\-Initialization}!begin@{begin}}
+\index{begin@{begin}!Modbus Object Instantiation/Initialization@{Modbus Object Instantiation/\-Initialization}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}void Modbus\-::begin (
+\begin{DoxyParamCaption}
+\item[{long}]{u32speed}
+\end{DoxyParamCaption}
+)}}\label{group__setup_ga475a4fa0fac491307b10c4529ad6d2a0}
+
+
+Initialize class object. 
+
+Sets up the serial port using specified baud rate. Call once class has been instantiated, typically within setup().
+
+\begin{DoxySeeAlso}{See Also}
+\href{http://arduino.cc/en/Serial/Begin#.Uy4CJ6aKlHY}{\tt http\-://arduino.\-cc/en/\-Serial/\-Begin\#.\-Uy4\-C\-J6a\-Kl\-H\-Y} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em speed} & baud rate, in standard increments (300..115200) \\
+\hline
+{\em config} & data frame settings (data length, parity and stop bits) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 250 of file Modbus\-Rtu.\-h.
+
+\hypertarget{group__setup_ga6449894306ff8cc5d4caff09b1b0d1ce}{\index{Modbus Object Instantiation/\-Initialization@{Modbus Object Instantiation/\-Initialization}!get\-I\-D@{get\-I\-D}}
+\index{get\-I\-D@{get\-I\-D}!Modbus Object Instantiation/Initialization@{Modbus Object Instantiation/\-Initialization}}
+\subsubsection[{get\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t Modbus\-::get\-I\-D (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{group__setup_ga6449894306ff8cc5d4caff09b1b0d1ce}
+
+
+get slave I\-D between 1 and 247 
+
+Method to read current slave I\-D address.
+
+\begin{DoxyReturn}{Returns}
+u8id current slave address between 1 and 247 
+\end{DoxyReturn}
+
+
+Definition at line 323 of file Modbus\-Rtu.\-h.
+
+\hypertarget{group__setup_ga101809cdd4734537bab58dc315a840b4}{\index{Modbus Object Instantiation/\-Initialization@{Modbus Object Instantiation/\-Initialization}!Modbus@{Modbus}}
+\index{Modbus@{Modbus}!Modbus Object Instantiation/Initialization@{Modbus Object Instantiation/\-Initialization}}
+\subsubsection[{Modbus}]{\setlength{\rightskip}{0pt plus 5cm}Modbus\-::\-Modbus (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{group__setup_ga101809cdd4734537bab58dc315a840b4}
+
+
+Default Constructor for Master through Serial. 
+
+
+
+Definition at line 204 of file Modbus\-Rtu.\-h.
+
+\hypertarget{group__setup_ga9bd497e97ac1777d4f0d4171078d60e0}{\index{Modbus Object Instantiation/\-Initialization@{Modbus Object Instantiation/\-Initialization}!set\-I\-D@{set\-I\-D}}
+\index{set\-I\-D@{set\-I\-D}!Modbus Object Instantiation/Initialization@{Modbus Object Instantiation/\-Initialization}}
+\subsubsection[{set\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}void Modbus\-::set\-I\-D (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{u8id}
+\end{DoxyParamCaption}
+)}}\label{group__setup_ga9bd497e97ac1777d4f0d4171078d60e0}
+
+
+write new I\-D for the slave 
+
+Method to write a new slave I\-D address.
+
+
+\begin{DoxyParams}{Parameters}
+{\em u8id} & new slave address between 1 and 247 \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 310 of file Modbus\-Rtu.\-h.
+
+\hypertarget{group__setup_gaf828190ebe24efb1b3b1957429f3872e}{\index{Modbus Object Instantiation/\-Initialization@{Modbus Object Instantiation/\-Initialization}!set\-Time\-Out@{set\-Time\-Out}}
+\index{set\-Time\-Out@{set\-Time\-Out}!Modbus Object Instantiation/Initialization@{Modbus Object Instantiation/\-Initialization}}
+\subsubsection[{set\-Time\-Out}]{\setlength{\rightskip}{0pt plus 5cm}void Modbus\-::set\-Time\-Out (
+\begin{DoxyParamCaption}
+\item[{uint16\-\_\-t}]{u16time\-Out}
+\end{DoxyParamCaption}
+)}}\label{group__setup_gaf828190ebe24efb1b3b1957429f3872e}
+
+
+write communication watch-\/dog timer 
+
+Initialize time-\/out parameter.
+
+Call once class has been instantiated, typically within setup(). The time-\/out timer is reset each time that there is a successful communication between Master and Slave. It works for both.
+
+
+\begin{DoxyParams}{Parameters}
+{\em time-\/out} & value (ms) \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 338 of file Modbus\-Rtu.\-h.
+

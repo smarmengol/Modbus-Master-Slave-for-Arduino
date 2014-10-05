@@ -1,0 +1,122 @@
+\hypertarget{group__buffer}{\section{Modbus Buffer Management}
+\label{group__buffer}\index{Modbus Buffer Management@{Modbus Buffer Management}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint16\-\_\-t \hyperlink{group__buffer_ga4fa6ede8df85b7cc70b1282b9547378a}{Modbus\-::get\-In\-Cnt} ()
+\begin{DoxyCompactList}\small\item\em number of incoming messages \end{DoxyCompactList}\item 
+uint16\-\_\-t \hyperlink{group__buffer_ga6f831ecaf3678c27dafb663a28bf81f0}{Modbus\-::get\-Out\-Cnt} ()
+\begin{DoxyCompactList}\small\item\em number of outcoming messages \end{DoxyCompactList}\item 
+uint16\-\_\-t \hyperlink{group__buffer_ga6883c7f3ff12f084ed56d559d4e06ed0}{Modbus\-::get\-Err\-Cnt} ()
+\begin{DoxyCompactList}\small\item\em error counter \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{group__buffer_ga2f39717d957a929af488c9120488fcdc}{Modbus\-::get\-State} ()
+\item 
+uint8\-\_\-t \hyperlink{group__buffer_gace7f726db13adc8feeceab987b719531}{Modbus\-::get\-Last\-Error} ()
+\begin{DoxyCompactList}\small\item\em get last error message \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Function Documentation}
+\hypertarget{group__buffer_ga6883c7f3ff12f084ed56d559d4e06ed0}{\index{Modbus Buffer Management@{Modbus Buffer Management}!get\-Err\-Cnt@{get\-Err\-Cnt}}
+\index{get\-Err\-Cnt@{get\-Err\-Cnt}!Modbus Buffer Management@{Modbus Buffer Management}}
+\subsubsection[{get\-Err\-Cnt}]{\setlength{\rightskip}{0pt plus 5cm}uint16\-\_\-t Modbus\-::get\-Err\-Cnt (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{group__buffer_ga6883c7f3ff12f084ed56d559d4e06ed0}
+
+
+error counter 
+
+Get errors counter value This can be useful to diagnose communication.
+
+\begin{DoxyReturn}{Returns}
+errors counter 
+\end{DoxyReturn}
+
+
+Definition at line 386 of file Modbus\-Rtu.\-h.
+
+\hypertarget{group__buffer_ga4fa6ede8df85b7cc70b1282b9547378a}{\index{Modbus Buffer Management@{Modbus Buffer Management}!get\-In\-Cnt@{get\-In\-Cnt}}
+\index{get\-In\-Cnt@{get\-In\-Cnt}!Modbus Buffer Management@{Modbus Buffer Management}}
+\subsubsection[{get\-In\-Cnt}]{\setlength{\rightskip}{0pt plus 5cm}uint16\-\_\-t Modbus\-::get\-In\-Cnt (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{group__buffer_ga4fa6ede8df85b7cc70b1282b9547378a}
+
+
+number of incoming messages 
+
+Get input messages counter value This can be useful to diagnose communication.
+
+\begin{DoxyReturn}{Returns}
+input messages counter 
+\end{DoxyReturn}
+
+
+Definition at line 362 of file Modbus\-Rtu.\-h.
+
+\hypertarget{group__buffer_gace7f726db13adc8feeceab987b719531}{\index{Modbus Buffer Management@{Modbus Buffer Management}!get\-Last\-Error@{get\-Last\-Error}}
+\index{get\-Last\-Error@{get\-Last\-Error}!Modbus Buffer Management@{Modbus Buffer Management}}
+\subsubsection[{get\-Last\-Error}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t Modbus\-::get\-Last\-Error (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{group__buffer_gace7f726db13adc8feeceab987b719531}
+
+
+get last error message 
+
+Get the last error in the protocol processor
+
+N\-O\-\_\-\-R\-E\-P\-L\-Y = 255 Time-\/out \begin{DoxyReturn}{Returns}
+E\-X\-C\-\_\-\-F\-U\-N\-C\-\_\-\-C\-O\-D\-E = 1 Function code not available 
+
+E\-X\-C\-\_\-\-A\-D\-D\-R\-\_\-\-R\-A\-N\-G\-E = 2 Address beyond available space for \hyperlink{class_modbus}{Modbus} registers 
+
+E\-X\-C\-\_\-\-R\-E\-G\-S\-\_\-\-Q\-U\-A\-N\-T = 3 Coils or registers number beyond the available space 
+\end{DoxyReturn}
+
+
+Definition at line 409 of file Modbus\-Rtu.\-h.
+
+\hypertarget{group__buffer_ga6f831ecaf3678c27dafb663a28bf81f0}{\index{Modbus Buffer Management@{Modbus Buffer Management}!get\-Out\-Cnt@{get\-Out\-Cnt}}
+\index{get\-Out\-Cnt@{get\-Out\-Cnt}!Modbus Buffer Management@{Modbus Buffer Management}}
+\subsubsection[{get\-Out\-Cnt}]{\setlength{\rightskip}{0pt plus 5cm}uint16\-\_\-t Modbus\-::get\-Out\-Cnt (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{group__buffer_ga6f831ecaf3678c27dafb663a28bf81f0}
+
+
+number of outcoming messages 
+
+Get transmitted messages counter value This can be useful to diagnose communication.
+
+\begin{DoxyReturn}{Returns}
+transmitted messages counter 
+\end{DoxyReturn}
+
+
+Definition at line 374 of file Modbus\-Rtu.\-h.
+
+\hypertarget{group__buffer_ga2f39717d957a929af488c9120488fcdc}{\index{Modbus Buffer Management@{Modbus Buffer Management}!get\-State@{get\-State}}
+\index{get\-State@{get\-State}!Modbus Buffer Management@{Modbus Buffer Management}}
+\subsubsection[{get\-State}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t Modbus\-::get\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{group__buffer_ga2f39717d957a929af488c9120488fcdc}
+Get modbus master state
+
+\begin{DoxyReturn}{Returns}
+= 0 I\-D\-L\-E, = 1 W\-A\-I\-T\-I\-N\-G F\-O\-R A\-N\-S\-W\-E\-R 
+\end{DoxyReturn}
+
+
+Definition at line 396 of file Modbus\-Rtu.\-h.
+

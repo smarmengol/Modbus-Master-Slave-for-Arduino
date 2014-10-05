@@ -1,0 +1,117 @@
+\hypertarget{group__loop}{\section{Modbus Object Management}
+\label{group__loop}\index{Modbus Object Management@{Modbus Object Management}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+boolean \hyperlink{group__loop_gaf6dd413191ed8a833022046873e0a063}{Modbus\-::get\-Time\-Out\-State} ()
+\begin{DoxyCompactList}\small\item\em get communication watch-\/dog timer state \end{DoxyCompactList}\item 
+int8\-\_\-t \hyperlink{group__loop_ga19398cabed57b6d085d014af6c149f54}{Modbus\-::query} (\hyperlink{structmodbus__t}{modbus\-\_\-t} telegram)
+\begin{DoxyCompactList}\small\item\em only for master \end{DoxyCompactList}\item 
+int8\-\_\-t \hyperlink{group__loop_ga53bde78490c1cd8e3c070a676bdcfb0d}{Modbus\-::poll} ()
+\begin{DoxyCompactList}\small\item\em cyclic poll for master \end{DoxyCompactList}\item 
+int8\-\_\-t \hyperlink{group__loop_gab3ef20562fc8cee14fc85f7e276890b5}{Modbus\-::poll} (uint16\-\_\-t $\ast$regs, uint8\-\_\-t u8size)
+\begin{DoxyCompactList}\small\item\em cyclic poll for slave \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Function Documentation}
+\hypertarget{group__loop_gaf6dd413191ed8a833022046873e0a063}{\index{Modbus Object Management@{Modbus Object Management}!get\-Time\-Out\-State@{get\-Time\-Out\-State}}
+\index{get\-Time\-Out\-State@{get\-Time\-Out\-State}!Modbus Object Management@{Modbus Object Management}}
+\subsubsection[{get\-Time\-Out\-State}]{\setlength{\rightskip}{0pt plus 5cm}boolean Modbus\-::get\-Time\-Out\-State (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{group__loop_gaf6dd413191ed8a833022046873e0a063}
+
+
+get communication watch-\/dog timer state 
+
+Return communication Watchdog state. It could be usefull to reset outputs if the watchdog is fired.
+
+\begin{DoxyReturn}{Returns}
+T\-R\-U\-E if millis() $>$ u32time\-Out 
+\end{DoxyReturn}
+
+
+Definition at line 350 of file Modbus\-Rtu.\-h.
+
+\hypertarget{group__loop_ga53bde78490c1cd8e3c070a676bdcfb0d}{\index{Modbus Object Management@{Modbus Object Management}!poll@{poll}}
+\index{poll@{poll}!Modbus Object Management@{Modbus Object Management}}
+\subsubsection[{poll}]{\setlength{\rightskip}{0pt plus 5cm}int8\-\_\-t Modbus\-::poll (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{group__loop_ga53bde78490c1cd8e3c070a676bdcfb0d}
+
+
+cyclic poll for master 
+
+$\ast$$\ast$$\ast$ Only for \hyperlink{class_modbus}{Modbus} Master $\ast$$\ast$$\ast$ This method checks if there is any incoming answer if pending. If there is no answer, it would change Master state to C\-O\-M\-\_\-\-I\-D\-L\-E. This method must be called only at loop section. Avoid any delay() function.
+
+Any incoming data would be redirected to au16regs pointer, as defined in its \hyperlink{structmodbus__t}{modbus\-\_\-t} query telegram.
+
+nothing \begin{DoxyReturn}{Returns}
+errors counter 
+\end{DoxyReturn}
+
+
+Definition at line 513 of file Modbus\-Rtu.\-h.
+
+\hypertarget{group__loop_gab3ef20562fc8cee14fc85f7e276890b5}{\index{Modbus Object Management@{Modbus Object Management}!poll@{poll}}
+\index{poll@{poll}!Modbus Object Management@{Modbus Object Management}}
+\subsubsection[{poll}]{\setlength{\rightskip}{0pt plus 5cm}int8\-\_\-t Modbus\-::poll (
+\begin{DoxyParamCaption}
+\item[{uint16\-\_\-t $\ast$}]{regs, }
+\item[{uint8\-\_\-t}]{u8size}
+\end{DoxyParamCaption}
+)}}\label{group__loop_gab3ef20562fc8cee14fc85f7e276890b5}
+
+
+cyclic poll for slave 
+
+$\ast$$\ast$$\ast$ Only for \hyperlink{class_modbus}{Modbus} Slave $\ast$$\ast$$\ast$ This method checks if there is any incoming query Afterwards, it would shoot a validation routine plus a register query Avoid any delay() function !!!! After a successful frame between the Master and the Slave, the time-\/out timer is reset.
+
+
+\begin{DoxyParams}{Parameters}
+{\em $\ast$regs} & register table for communication exchange \\
+\hline
+{\em u8size} & size of the register table \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if no query, 1..4 if communication error, $>$4 if correct query processed 
+\end{DoxyReturn}
+
+
+Definition at line 588 of file Modbus\-Rtu.\-h.
+
+\hypertarget{group__loop_ga19398cabed57b6d085d014af6c149f54}{\index{Modbus Object Management@{Modbus Object Management}!query@{query}}
+\index{query@{query}!Modbus Object Management@{Modbus Object Management}}
+\subsubsection[{query}]{\setlength{\rightskip}{0pt plus 5cm}int8\-\_\-t Modbus\-::query (
+\begin{DoxyParamCaption}
+\item[{{\bf modbus\-\_\-t}}]{telegram}
+\end{DoxyParamCaption}
+)}}\label{group__loop_ga19398cabed57b6d085d014af6c149f54}
+
+
+only for master 
+
+$\ast$$\ast$$\ast$ Only \hyperlink{class_modbus}{Modbus} Master $\ast$$\ast$$\ast$ Generate a query to an slave with a \hyperlink{structmodbus__t}{modbus\-\_\-t} telegram structure The Master must be in C\-O\-M\-\_\-\-I\-D\-L\-E mode. After it, its state would be C\-O\-M\-\_\-\-W\-A\-I\-T\-I\-N\-G. This method has to be called only in loop() section.
+
+\begin{DoxySeeAlso}{See Also}
+\hyperlink{structmodbus__t}{modbus\-\_\-t} 
+\end{DoxySeeAlso}
+
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{structmodbus__t}{modbus\-\_\-t}} & modbus telegram structure (id, fct, ...)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000001}{Todo}]finish function 15 \end{DoxyRefDesc}
+
+
+Definition at line 425 of file Modbus\-Rtu.\-h.
+

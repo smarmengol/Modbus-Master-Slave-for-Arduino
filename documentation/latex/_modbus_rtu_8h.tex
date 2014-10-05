@@ -1,0 +1,291 @@
+\hypertarget{_modbus_rtu_8h}{\section{Modbus\-Rtu.\-h File Reference}
+\label{_modbus_rtu_8h}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}
+}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structmodbus__t}{modbus\-\_\-t}
+\begin{DoxyCompactList}\small\item\em Master query structure\-: This includes all the necessary fields to make the Master generate a \hyperlink{class_modbus}{Modbus} query. A Master may keep several of these structures and send them cyclically or use them according to program needs. \end{DoxyCompactList}\item 
+class \hyperlink{class_modbus}{Modbus}
+\begin{DoxyCompactList}\small\item\em Arduino class library for communicating with \hyperlink{class_modbus}{Modbus} devices over U\-S\-B/\-R\-S232/485 (via R\-T\-U protocol). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{_modbus_rtu_8h_ac5a7c6ee8dea0ccb09dfc611bd08a0ac}{T35}~5
+\item 
+\#define \hyperlink{_modbus_rtu_8h_a1d5dab30b404fab91608086105afc78c}{M\-A\-X\-\_\-\-B\-U\-F\-F\-E\-R}~64
+\begin{DoxyCompactList}\small\item\em maximum size for the communication buffer in bytes \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \hyperlink{_modbus_rtu_8h_a06fc87d81c62e9abb8790b6e5713c55bad1acb34c5312efc75c4a007eae09433b}{R\-E\-S\-P\-O\-N\-S\-E\-\_\-\-S\-I\-Z\-E} = 6, 
+\hyperlink{_modbus_rtu_8h_a06fc87d81c62e9abb8790b6e5713c55ba4bf89c487b3f7e29d56eb3fe657d6c05}{E\-X\-C\-E\-P\-T\-I\-O\-N\-\_\-\-S\-I\-Z\-E} = 3, 
+\hyperlink{_modbus_rtu_8h_a06fc87d81c62e9abb8790b6e5713c55baefcc8f6d8d181aaef9d131a357b1a332}{C\-H\-E\-C\-K\-S\-U\-M\-\_\-\-S\-I\-Z\-E} = 2
+ \}
+\item 
+enum \hyperlink{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230ba}{M\-E\-S\-S\-A\-G\-E} \{ \\*
+\hyperlink{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baa001479a58fb44c39a29b20d565081a68}{I\-D} = 0, 
+\hyperlink{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baa389e03ce61ac2d93fd54069187ab58af}{F\-U\-N\-C}, 
+\hyperlink{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baad19e7653c9276b91fb590af017de192c}{A\-D\-D\-\_\-\-H\-I}, 
+\hyperlink{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baa2cbdff2e20e58233096845bf42acc97c}{A\-D\-D\-\_\-\-L\-O}, 
+\\*
+\hyperlink{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baa61f961bb4614db2fc51125331f79a9d6}{N\-B\-\_\-\-H\-I}, 
+\hyperlink{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baa22b2a3a58501a5bbe69ef569aa7fb30f}{N\-B\-\_\-\-L\-O}, 
+\hyperlink{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baaf84036e1dd68a2e160c3394fc083e892}{B\-Y\-T\-E\-\_\-\-C\-N\-T}
+ \}
+\begin{DoxyCompactList}\small\item\em Indexes to telegram frame positions. \end{DoxyCompactList}\item 
+enum \hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6}{M\-B\-\_\-\-F\-C} \{ \\*
+\hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a513dc96919a5d5c75f129c1b5b2afea9}{M\-B\-\_\-\-F\-C\-\_\-\-N\-O\-N\-E} = 0, 
+\hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a0b2250567e3e0e43522a64cdce637ce0}{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-C\-O\-I\-L\-S} = 1, 
+\hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6ac2b52680d6c0bbe3d3e0e9ec7a88fc2e}{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-D\-I\-S\-C\-R\-E\-T\-E\-\_\-\-I\-N\-P\-U\-T} = 2, 
+\hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a0c6066cf0a67a1bb349da35ef31e4e8f}{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-S} = 3, 
+\\*
+\hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a9b2d4a3fb96e4af559d5330ad0c01c07}{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-I\-N\-P\-U\-T\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R} = 4, 
+\hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a90126d6c25fb5711c103e819ccda01c7}{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-C\-O\-I\-L} = 5, 
+\hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a74e1ffd48177f0e7e33c2c968a1bd86f}{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R} = 6, 
+\hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6ac69c42d25cbc0ef303de57bd3d0e2304}{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-M\-U\-L\-T\-I\-P\-L\-E\-\_\-\-C\-O\-I\-L\-S} = 15, 
+\\*
+\hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a2ccdcde4f07865ffb47fbea0a01026bb}{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-M\-U\-L\-T\-I\-P\-L\-E\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-S} = 16
+ \}
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_modbus}{Modbus} function codes summary. These are the implement function codes either for Master or for Slave. \end{DoxyCompactList}\item 
+enum \hyperlink{_modbus_rtu_8h_a4f165b5bd333856a84635b2594013982}{C\-O\-M\-\_\-\-S\-T\-A\-T\-E\-S} \{ \hyperlink{_modbus_rtu_8h_a4f165b5bd333856a84635b2594013982a3e262bfb13968e43ab8ea55a03ba8b20}{C\-O\-M\-\_\-\-I\-D\-L\-E} = 0, 
+\hyperlink{_modbus_rtu_8h_a4f165b5bd333856a84635b2594013982ad70b4cc84cc2f21d8b46f73f186dae6b}{C\-O\-M\-\_\-\-W\-A\-I\-T\-I\-N\-G} = 1
+ \}
+\item 
+enum \hyperlink{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1}{E\-R\-R\-\_\-\-L\-I\-S\-T} \{ \\*
+\hyperlink{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1a12a9ad0aaae512b253a9da9ea19f2b04}{E\-R\-R\-\_\-\-N\-O\-T\-\_\-\-M\-A\-S\-T\-E\-R} = -\/1, 
+\hyperlink{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1a7d2c6c1b333f4b566c613e52b62ab901}{E\-R\-R\-\_\-\-P\-O\-L\-L\-I\-N\-G} = -\/2, 
+\hyperlink{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1aafd42890a0ce129e23977fc1aca4044b}{E\-R\-R\-\_\-\-B\-U\-F\-F\-\_\-\-O\-V\-E\-R\-F\-L\-O\-W} = -\/3, 
+\hyperlink{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1a918477ee2e5e31f01b03a83f472b63b0}{E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-C\-R\-C} = -\/4, 
+\\*
+\hyperlink{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1ab4be9b5f7e8905633a3c045157f1dd0a}{E\-R\-R\-\_\-\-E\-X\-C\-E\-P\-T\-I\-O\-N} = -\/5
+ \}
+\item 
+enum \{ \\*
+\hyperlink{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7aa04c58a8cc2e7777f6f781e8d51524ae}{N\-O\-\_\-\-R\-E\-P\-L\-Y} = 255, 
+\hyperlink{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7ad82ec66545269170f1401af6e418e8f2}{E\-X\-C\-\_\-\-F\-U\-N\-C\-\_\-\-C\-O\-D\-E} = 1, 
+\hyperlink{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7ad3899b13b2069997f5db7f18e9978280}{E\-X\-C\-\_\-\-A\-D\-D\-R\-\_\-\-R\-A\-N\-G\-E} = 2, 
+\hyperlink{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7a062e13fdfefabb1d620506a526be3920}{E\-X\-C\-\_\-\-R\-E\-G\-S\-\_\-\-Q\-U\-A\-N\-T} = 3, 
+\\*
+\hyperlink{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7a00e93edc9146c12fd21490d1a0d15f89}{E\-X\-C\-\_\-\-E\-X\-E\-C\-U\-T\-E} = 4
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const unsigned char \hyperlink{_modbus_rtu_8h_aede21762dc4aa80a14df8dd40ef105f0}{fctsupported} \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVersion}{Version}
+1.\-2 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2014.\-09.\-09 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Samuel Marco i Armengol  \href{mailto:sammarcoarmengol@gmail.com}{\tt sammarcoarmengol@gmail.\-com} 
+\end{DoxyAuthor}
+Arduino library for communicating with \hyperlink{class_modbus}{Modbus} devices over R\-S232/\-U\-S\-B/485 via R\-T\-U protocol.
+
+Further information\-: \href{http://modbus.org/}{\tt http\-://modbus.\-org/} \href{http://modbus.org/docs/Modbus_over_serial_line_V1_02.pdf}{\tt http\-://modbus.\-org/docs/\-Modbus\-\_\-over\-\_\-serial\-\_\-line\-\_\-\-V1\-\_\-02.\-pdf}
+
+This library is free software; you can redistribute it and/or modify it under the terms of the G\-N\-U Lesser General Public License as published by the Free Software Foundation; version 2.\-1 of the License.
+
+This library is distributed in the hope that it will be useful, but W\-I\-T\-H\-O\-U\-T A\-N\-Y W\-A\-R\-R\-A\-N\-T\-Y; without even the implied warranty of M\-E\-R\-C\-H\-A\-N\-T\-A\-B\-I\-L\-I\-T\-Y or F\-I\-T\-N\-E\-S\-S F\-O\-R A P\-A\-R\-T\-I\-C\-U\-L\-A\-R P\-U\-R\-P\-O\-S\-E. See the G\-N\-U Lesser General Public License for more details.
+
+You should have received a copy of the G\-N\-U Lesser General Public License along with this library; if not, write to the Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, M\-A 02110-\/1301 U\-S\-A 
+
+Definition in file \hyperlink{_modbus_rtu_8h_source}{Modbus\-Rtu.\-h}.
+
+
+
+\subsection{Macro Definition Documentation}
+\hypertarget{_modbus_rtu_8h_a1d5dab30b404fab91608086105afc78c}{\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!M\-A\-X\-\_\-\-B\-U\-F\-F\-E\-R@{M\-A\-X\-\_\-\-B\-U\-F\-F\-E\-R}}
+\index{M\-A\-X\-\_\-\-B\-U\-F\-F\-E\-R@{M\-A\-X\-\_\-\-B\-U\-F\-F\-E\-R}!ModbusRtu.h@{Modbus\-Rtu.\-h}}
+\subsubsection[{M\-A\-X\-\_\-\-B\-U\-F\-F\-E\-R}]{\setlength{\rightskip}{0pt plus 5cm}\#define M\-A\-X\-\_\-\-B\-U\-F\-F\-E\-R~64}}\label{_modbus_rtu_8h_a1d5dab30b404fab91608086105afc78c}
+
+
+maximum size for the communication buffer in bytes 
+
+
+
+Definition at line 133 of file Modbus\-Rtu.\-h.
+
+\hypertarget{_modbus_rtu_8h_ac5a7c6ee8dea0ccb09dfc611bd08a0ac}{\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!T35@{T35}}
+\index{T35@{T35}!ModbusRtu.h@{Modbus\-Rtu.\-h}}
+\subsubsection[{T35}]{\setlength{\rightskip}{0pt plus 5cm}\#define T35~5}}\label{_modbus_rtu_8h_ac5a7c6ee8dea0ccb09dfc611bd08a0ac}
+
+
+Definition at line 132 of file Modbus\-Rtu.\-h.
+
+
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{_modbus_rtu_8h_a06fc87d81c62e9abb8790b6e5713c55b}{\subsubsection[{anonymous enum}]{\setlength{\rightskip}{0pt plus 5cm}anonymous enum}}\label{_modbus_rtu_8h_a06fc87d81c62e9abb8790b6e5713c55b}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{R\-E\-S\-P\-O\-N\-S\-E\-\_\-\-S\-I\-Z\-E@{R\-E\-S\-P\-O\-N\-S\-E\-\_\-\-S\-I\-Z\-E}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!R\-E\-S\-P\-O\-N\-S\-E\-\_\-\-S\-I\-Z\-E@{R\-E\-S\-P\-O\-N\-S\-E\-\_\-\-S\-I\-Z\-E}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_a06fc87d81c62e9abb8790b6e5713c55bad1acb34c5312efc75c4a007eae09433b}{R\-E\-S\-P\-O\-N\-S\-E\-\_\-\-S\-I\-Z\-E}\label{_modbus_rtu_8h_a06fc87d81c62e9abb8790b6e5713c55bad1acb34c5312efc75c4a007eae09433b}
+}]\index{E\-X\-C\-E\-P\-T\-I\-O\-N\-\_\-\-S\-I\-Z\-E@{E\-X\-C\-E\-P\-T\-I\-O\-N\-\_\-\-S\-I\-Z\-E}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!E\-X\-C\-E\-P\-T\-I\-O\-N\-\_\-\-S\-I\-Z\-E@{E\-X\-C\-E\-P\-T\-I\-O\-N\-\_\-\-S\-I\-Z\-E}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_a06fc87d81c62e9abb8790b6e5713c55ba4bf89c487b3f7e29d56eb3fe657d6c05}{E\-X\-C\-E\-P\-T\-I\-O\-N\-\_\-\-S\-I\-Z\-E}\label{_modbus_rtu_8h_a06fc87d81c62e9abb8790b6e5713c55ba4bf89c487b3f7e29d56eb3fe657d6c05}
+}]\index{C\-H\-E\-C\-K\-S\-U\-M\-\_\-\-S\-I\-Z\-E@{C\-H\-E\-C\-K\-S\-U\-M\-\_\-\-S\-I\-Z\-E}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!C\-H\-E\-C\-K\-S\-U\-M\-\_\-\-S\-I\-Z\-E@{C\-H\-E\-C\-K\-S\-U\-M\-\_\-\-S\-I\-Z\-E}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_a06fc87d81c62e9abb8790b6e5713c55baefcc8f6d8d181aaef9d131a357b1a332}{C\-H\-E\-C\-K\-S\-U\-M\-\_\-\-S\-I\-Z\-E}\label{_modbus_rtu_8h_a06fc87d81c62e9abb8790b6e5713c55baefcc8f6d8d181aaef9d131a357b1a332}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 57 of file Modbus\-Rtu.\-h.
+
+\hypertarget{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7}{\subsubsection[{anonymous enum}]{\setlength{\rightskip}{0pt plus 5cm}anonymous enum}}\label{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{N\-O\-\_\-\-R\-E\-P\-L\-Y@{N\-O\-\_\-\-R\-E\-P\-L\-Y}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!N\-O\-\_\-\-R\-E\-P\-L\-Y@{N\-O\-\_\-\-R\-E\-P\-L\-Y}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7aa04c58a8cc2e7777f6f781e8d51524ae}{N\-O\-\_\-\-R\-E\-P\-L\-Y}\label{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7aa04c58a8cc2e7777f6f781e8d51524ae}
+}]\index{E\-X\-C\-\_\-\-F\-U\-N\-C\-\_\-\-C\-O\-D\-E@{E\-X\-C\-\_\-\-F\-U\-N\-C\-\_\-\-C\-O\-D\-E}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!E\-X\-C\-\_\-\-F\-U\-N\-C\-\_\-\-C\-O\-D\-E@{E\-X\-C\-\_\-\-F\-U\-N\-C\-\_\-\-C\-O\-D\-E}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7ad82ec66545269170f1401af6e418e8f2}{E\-X\-C\-\_\-\-F\-U\-N\-C\-\_\-\-C\-O\-D\-E}\label{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7ad82ec66545269170f1401af6e418e8f2}
+}]\index{E\-X\-C\-\_\-\-A\-D\-D\-R\-\_\-\-R\-A\-N\-G\-E@{E\-X\-C\-\_\-\-A\-D\-D\-R\-\_\-\-R\-A\-N\-G\-E}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!E\-X\-C\-\_\-\-A\-D\-D\-R\-\_\-\-R\-A\-N\-G\-E@{E\-X\-C\-\_\-\-A\-D\-D\-R\-\_\-\-R\-A\-N\-G\-E}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7ad3899b13b2069997f5db7f18e9978280}{E\-X\-C\-\_\-\-A\-D\-D\-R\-\_\-\-R\-A\-N\-G\-E}\label{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7ad3899b13b2069997f5db7f18e9978280}
+}]\index{E\-X\-C\-\_\-\-R\-E\-G\-S\-\_\-\-Q\-U\-A\-N\-T@{E\-X\-C\-\_\-\-R\-E\-G\-S\-\_\-\-Q\-U\-A\-N\-T}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!E\-X\-C\-\_\-\-R\-E\-G\-S\-\_\-\-Q\-U\-A\-N\-T@{E\-X\-C\-\_\-\-R\-E\-G\-S\-\_\-\-Q\-U\-A\-N\-T}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7a062e13fdfefabb1d620506a526be3920}{E\-X\-C\-\_\-\-R\-E\-G\-S\-\_\-\-Q\-U\-A\-N\-T}\label{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7a062e13fdfefabb1d620506a526be3920}
+}]\index{E\-X\-C\-\_\-\-E\-X\-E\-C\-U\-T\-E@{E\-X\-C\-\_\-\-E\-X\-E\-C\-U\-T\-E}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!E\-X\-C\-\_\-\-E\-X\-E\-C\-U\-T\-E@{E\-X\-C\-\_\-\-E\-X\-E\-C\-U\-T\-E}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7a00e93edc9146c12fd21490d1a0d15f89}{E\-X\-C\-\_\-\-E\-X\-E\-C\-U\-T\-E}\label{_modbus_rtu_8h_adf764cbdea00d65edcd07bb9953ad2b7a00e93edc9146c12fd21490d1a0d15f89}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 113 of file Modbus\-Rtu.\-h.
+
+\hypertarget{_modbus_rtu_8h_a4f165b5bd333856a84635b2594013982}{\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!C\-O\-M\-\_\-\-S\-T\-A\-T\-E\-S@{C\-O\-M\-\_\-\-S\-T\-A\-T\-E\-S}}
+\index{C\-O\-M\-\_\-\-S\-T\-A\-T\-E\-S@{C\-O\-M\-\_\-\-S\-T\-A\-T\-E\-S}!ModbusRtu.h@{Modbus\-Rtu.\-h}}
+\subsubsection[{C\-O\-M\-\_\-\-S\-T\-A\-T\-E\-S}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf C\-O\-M\-\_\-\-S\-T\-A\-T\-E\-S}}}\label{_modbus_rtu_8h_a4f165b5bd333856a84635b2594013982}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{C\-O\-M\-\_\-\-I\-D\-L\-E@{C\-O\-M\-\_\-\-I\-D\-L\-E}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!C\-O\-M\-\_\-\-I\-D\-L\-E@{C\-O\-M\-\_\-\-I\-D\-L\-E}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_a4f165b5bd333856a84635b2594013982a3e262bfb13968e43ab8ea55a03ba8b20}{C\-O\-M\-\_\-\-I\-D\-L\-E}\label{_modbus_rtu_8h_a4f165b5bd333856a84635b2594013982a3e262bfb13968e43ab8ea55a03ba8b20}
+}]\index{C\-O\-M\-\_\-\-W\-A\-I\-T\-I\-N\-G@{C\-O\-M\-\_\-\-W\-A\-I\-T\-I\-N\-G}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!C\-O\-M\-\_\-\-W\-A\-I\-T\-I\-N\-G@{C\-O\-M\-\_\-\-W\-A\-I\-T\-I\-N\-G}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_a4f165b5bd333856a84635b2594013982ad70b4cc84cc2f21d8b46f73f186dae6b}{C\-O\-M\-\_\-\-W\-A\-I\-T\-I\-N\-G}\label{_modbus_rtu_8h_a4f165b5bd333856a84635b2594013982ad70b4cc84cc2f21d8b46f73f186dae6b}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 99 of file Modbus\-Rtu.\-h.
+
+\hypertarget{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1}{\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!E\-R\-R\-\_\-\-L\-I\-S\-T@{E\-R\-R\-\_\-\-L\-I\-S\-T}}
+\index{E\-R\-R\-\_\-\-L\-I\-S\-T@{E\-R\-R\-\_\-\-L\-I\-S\-T}!ModbusRtu.h@{Modbus\-Rtu.\-h}}
+\subsubsection[{E\-R\-R\-\_\-\-L\-I\-S\-T}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf E\-R\-R\-\_\-\-L\-I\-S\-T}}}\label{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{E\-R\-R\-\_\-\-N\-O\-T\-\_\-\-M\-A\-S\-T\-E\-R@{E\-R\-R\-\_\-\-N\-O\-T\-\_\-\-M\-A\-S\-T\-E\-R}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!E\-R\-R\-\_\-\-N\-O\-T\-\_\-\-M\-A\-S\-T\-E\-R@{E\-R\-R\-\_\-\-N\-O\-T\-\_\-\-M\-A\-S\-T\-E\-R}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1a12a9ad0aaae512b253a9da9ea19f2b04}{E\-R\-R\-\_\-\-N\-O\-T\-\_\-\-M\-A\-S\-T\-E\-R}\label{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1a12a9ad0aaae512b253a9da9ea19f2b04}
+}]\index{E\-R\-R\-\_\-\-P\-O\-L\-L\-I\-N\-G@{E\-R\-R\-\_\-\-P\-O\-L\-L\-I\-N\-G}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!E\-R\-R\-\_\-\-P\-O\-L\-L\-I\-N\-G@{E\-R\-R\-\_\-\-P\-O\-L\-L\-I\-N\-G}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1a7d2c6c1b333f4b566c613e52b62ab901}{E\-R\-R\-\_\-\-P\-O\-L\-L\-I\-N\-G}\label{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1a7d2c6c1b333f4b566c613e52b62ab901}
+}]\index{E\-R\-R\-\_\-\-B\-U\-F\-F\-\_\-\-O\-V\-E\-R\-F\-L\-O\-W@{E\-R\-R\-\_\-\-B\-U\-F\-F\-\_\-\-O\-V\-E\-R\-F\-L\-O\-W}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!E\-R\-R\-\_\-\-B\-U\-F\-F\-\_\-\-O\-V\-E\-R\-F\-L\-O\-W@{E\-R\-R\-\_\-\-B\-U\-F\-F\-\_\-\-O\-V\-E\-R\-F\-L\-O\-W}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1aafd42890a0ce129e23977fc1aca4044b}{E\-R\-R\-\_\-\-B\-U\-F\-F\-\_\-\-O\-V\-E\-R\-F\-L\-O\-W}\label{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1aafd42890a0ce129e23977fc1aca4044b}
+}]\index{E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-C\-R\-C@{E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-C\-R\-C}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-C\-R\-C@{E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-C\-R\-C}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1a918477ee2e5e31f01b03a83f472b63b0}{E\-R\-R\-\_\-\-B\-A\-D\-\_\-\-C\-R\-C}\label{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1a918477ee2e5e31f01b03a83f472b63b0}
+}]\index{E\-R\-R\-\_\-\-E\-X\-C\-E\-P\-T\-I\-O\-N@{E\-R\-R\-\_\-\-E\-X\-C\-E\-P\-T\-I\-O\-N}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!E\-R\-R\-\_\-\-E\-X\-C\-E\-P\-T\-I\-O\-N@{E\-R\-R\-\_\-\-E\-X\-C\-E\-P\-T\-I\-O\-N}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1ab4be9b5f7e8905633a3c045157f1dd0a}{E\-R\-R\-\_\-\-E\-X\-C\-E\-P\-T\-I\-O\-N}\label{_modbus_rtu_8h_a792f00821300f1c7c768db990db646c1ab4be9b5f7e8905633a3c045157f1dd0a}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line 105 of file Modbus\-Rtu.\-h.
+
+\hypertarget{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6}{\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!M\-B\-\_\-\-F\-C@{M\-B\-\_\-\-F\-C}}
+\index{M\-B\-\_\-\-F\-C@{M\-B\-\_\-\-F\-C}!ModbusRtu.h@{Modbus\-Rtu.\-h}}
+\subsubsection[{M\-B\-\_\-\-F\-C}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf M\-B\-\_\-\-F\-C}}}\label{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6}
+
+
+\hyperlink{class_modbus}{Modbus} function codes summary. These are the implement function codes either for Master or for Slave. 
+
+\begin{DoxySeeAlso}{See Also}
+also \hyperlink{_modbus_rtu_8h_aede21762dc4aa80a14df8dd40ef105f0}{fctsupported} 
+
+also \hyperlink{structmodbus__t}{modbus\-\_\-t} 
+\end{DoxySeeAlso}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{M\-B\-\_\-\-F\-C\-\_\-\-N\-O\-N\-E@{M\-B\-\_\-\-F\-C\-\_\-\-N\-O\-N\-E}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!M\-B\-\_\-\-F\-C\-\_\-\-N\-O\-N\-E@{M\-B\-\_\-\-F\-C\-\_\-\-N\-O\-N\-E}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a513dc96919a5d5c75f129c1b5b2afea9}{M\-B\-\_\-\-F\-C\-\_\-\-N\-O\-N\-E}\label{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a513dc96919a5d5c75f129c1b5b2afea9}
+}]null operator \index{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-C\-O\-I\-L\-S@{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-C\-O\-I\-L\-S}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-C\-O\-I\-L\-S@{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-C\-O\-I\-L\-S}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a0b2250567e3e0e43522a64cdce637ce0}{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-C\-O\-I\-L\-S}\label{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a0b2250567e3e0e43522a64cdce637ce0}
+}]F\-C\-T=1 -\/$>$ read coils or digital outputs \index{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-D\-I\-S\-C\-R\-E\-T\-E\-\_\-\-I\-N\-P\-U\-T@{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-D\-I\-S\-C\-R\-E\-T\-E\-\_\-\-I\-N\-P\-U\-T}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-D\-I\-S\-C\-R\-E\-T\-E\-\_\-\-I\-N\-P\-U\-T@{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-D\-I\-S\-C\-R\-E\-T\-E\-\_\-\-I\-N\-P\-U\-T}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6ac2b52680d6c0bbe3d3e0e9ec7a88fc2e}{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-D\-I\-S\-C\-R\-E\-T\-E\-\_\-\-I\-N\-P\-U\-T}\label{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6ac2b52680d6c0bbe3d3e0e9ec7a88fc2e}
+}]F\-C\-T=2 -\/$>$ read digital inputs \index{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-S@{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-S}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-S@{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-S}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a0c6066cf0a67a1bb349da35ef31e4e8f}{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-S}\label{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a0c6066cf0a67a1bb349da35ef31e4e8f}
+}]F\-C\-T=3 -\/$>$ read registers or analog outputs \index{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-I\-N\-P\-U\-T\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R@{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-I\-N\-P\-U\-T\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-I\-N\-P\-U\-T\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R@{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-I\-N\-P\-U\-T\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a9b2d4a3fb96e4af559d5330ad0c01c07}{M\-B\-\_\-\-F\-C\-\_\-\-R\-E\-A\-D\-\_\-\-I\-N\-P\-U\-T\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R}\label{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a9b2d4a3fb96e4af559d5330ad0c01c07}
+}]F\-C\-T=4 -\/$>$ read analog inputs \index{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-C\-O\-I\-L@{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-C\-O\-I\-L}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-C\-O\-I\-L@{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-C\-O\-I\-L}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a90126d6c25fb5711c103e819ccda01c7}{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-C\-O\-I\-L}\label{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a90126d6c25fb5711c103e819ccda01c7}
+}]F\-C\-T=5 -\/$>$ write single coil or output \index{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R@{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R@{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a74e1ffd48177f0e7e33c2c968a1bd86f}{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R}\label{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a74e1ffd48177f0e7e33c2c968a1bd86f}
+}]F\-C\-T=6 -\/$>$ write single register \index{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-M\-U\-L\-T\-I\-P\-L\-E\-\_\-\-C\-O\-I\-L\-S@{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-M\-U\-L\-T\-I\-P\-L\-E\-\_\-\-C\-O\-I\-L\-S}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-M\-U\-L\-T\-I\-P\-L\-E\-\_\-\-C\-O\-I\-L\-S@{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-M\-U\-L\-T\-I\-P\-L\-E\-\_\-\-C\-O\-I\-L\-S}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6ac69c42d25cbc0ef303de57bd3d0e2304}{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-M\-U\-L\-T\-I\-P\-L\-E\-\_\-\-C\-O\-I\-L\-S}\label{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6ac69c42d25cbc0ef303de57bd3d0e2304}
+}]F\-C\-T=15 -\/$>$ write multiple coils or outputs \index{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-M\-U\-L\-T\-I\-P\-L\-E\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-S@{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-M\-U\-L\-T\-I\-P\-L\-E\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-S}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-M\-U\-L\-T\-I\-P\-L\-E\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-S@{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-M\-U\-L\-T\-I\-P\-L\-E\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-S}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a2ccdcde4f07865ffb47fbea0a01026bb}{M\-B\-\_\-\-F\-C\-\_\-\-W\-R\-I\-T\-E\-\_\-\-M\-U\-L\-T\-I\-P\-L\-E\-\_\-\-R\-E\-G\-I\-S\-T\-E\-R\-S}\label{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a2ccdcde4f07865ffb47fbea0a01026bb}
+}]F\-C\-T=16 -\/$>$ write multiple registers \end{description}
+\end{Desc}
+
+
+Definition at line 87 of file Modbus\-Rtu.\-h.
+
+\hypertarget{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230ba}{\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!M\-E\-S\-S\-A\-G\-E@{M\-E\-S\-S\-A\-G\-E}}
+\index{M\-E\-S\-S\-A\-G\-E@{M\-E\-S\-S\-A\-G\-E}!ModbusRtu.h@{Modbus\-Rtu.\-h}}
+\subsubsection[{M\-E\-S\-S\-A\-G\-E}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf M\-E\-S\-S\-A\-G\-E}}}\label{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230ba}
+
+
+Indexes to telegram frame positions. 
+
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{I\-D@{I\-D}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!I\-D@{I\-D}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baa001479a58fb44c39a29b20d565081a68}{I\-D}\label{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baa001479a58fb44c39a29b20d565081a68}
+}]I\-D field. \index{F\-U\-N\-C@{F\-U\-N\-C}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!F\-U\-N\-C@{F\-U\-N\-C}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baa389e03ce61ac2d93fd54069187ab58af}{F\-U\-N\-C}\label{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baa389e03ce61ac2d93fd54069187ab58af}
+}]Function code position. \index{A\-D\-D\-\_\-\-H\-I@{A\-D\-D\-\_\-\-H\-I}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!A\-D\-D\-\_\-\-H\-I@{A\-D\-D\-\_\-\-H\-I}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baad19e7653c9276b91fb590af017de192c}{A\-D\-D\-\_\-\-H\-I}\label{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baad19e7653c9276b91fb590af017de192c}
+}]Address high byte. \index{A\-D\-D\-\_\-\-L\-O@{A\-D\-D\-\_\-\-L\-O}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!A\-D\-D\-\_\-\-L\-O@{A\-D\-D\-\_\-\-L\-O}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baa2cbdff2e20e58233096845bf42acc97c}{A\-D\-D\-\_\-\-L\-O}\label{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baa2cbdff2e20e58233096845bf42acc97c}
+}]Address low byte. \index{N\-B\-\_\-\-H\-I@{N\-B\-\_\-\-H\-I}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!N\-B\-\_\-\-H\-I@{N\-B\-\_\-\-H\-I}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baa61f961bb4614db2fc51125331f79a9d6}{N\-B\-\_\-\-H\-I}\label{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baa61f961bb4614db2fc51125331f79a9d6}
+}]Number of coils or registers high byte. \index{N\-B\-\_\-\-L\-O@{N\-B\-\_\-\-L\-O}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!N\-B\-\_\-\-L\-O@{N\-B\-\_\-\-L\-O}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baa22b2a3a58501a5bbe69ef569aa7fb30f}{N\-B\-\_\-\-L\-O}\label{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baa22b2a3a58501a5bbe69ef569aa7fb30f}
+}]Number of coils or registers low byte. \index{B\-Y\-T\-E\-\_\-\-C\-N\-T@{B\-Y\-T\-E\-\_\-\-C\-N\-T}!Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}}\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!B\-Y\-T\-E\-\_\-\-C\-N\-T@{B\-Y\-T\-E\-\_\-\-C\-N\-T}}\item[{\em 
+\hypertarget{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baaf84036e1dd68a2e160c3394fc083e892}{B\-Y\-T\-E\-\_\-\-C\-N\-T}\label{_modbus_rtu_8h_aa9996e8b4648c78acf6cde2401e230baaf84036e1dd68a2e160c3394fc083e892}
+}]byte counter \end{description}
+\end{Desc}
+
+
+Definition at line 68 of file Modbus\-Rtu.\-h.
+
+
+
+\subsection{Variable Documentation}
+\hypertarget{_modbus_rtu_8h_aede21762dc4aa80a14df8dd40ef105f0}{\index{Modbus\-Rtu.\-h@{Modbus\-Rtu.\-h}!fctsupported@{fctsupported}}
+\index{fctsupported@{fctsupported}!ModbusRtu.h@{Modbus\-Rtu.\-h}}
+\subsubsection[{fctsupported}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned char fctsupported\mbox{[}$\,$\mbox{]}}}\label{_modbus_rtu_8h_aede21762dc4aa80a14df8dd40ef105f0}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+= \{ 
+  \hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a0b2250567e3e0e43522a64cdce637ce0}{MB\_FC\_READ\_COILS},
+  \hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6ac2b52680d6c0bbe3d3e0e9ec7a88fc2e}{MB\_FC\_READ\_DISCRETE\_INPUT},
+  \hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a0c6066cf0a67a1bb349da35ef31e4e8f}{MB\_FC\_READ\_REGISTERS}, 
+  \hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a9b2d4a3fb96e4af559d5330ad0c01c07}{MB\_FC\_READ\_INPUT\_REGISTER},
+  \hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a90126d6c25fb5711c103e819ccda01c7}{MB\_FC\_WRITE\_COIL},
+  \hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a74e1ffd48177f0e7e33c2c968a1bd86f}{MB\_FC\_WRITE\_REGISTER}, 
+  \hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6ac69c42d25cbc0ef303de57bd3d0e2304}{MB\_FC\_WRITE\_MULTIPLE\_COILS},
+  \hyperlink{_modbus_rtu_8h_aff1341ea5077cc6097a0d7db89be4cf6a2ccdcde4f07865ffb47fbea0a01026bb}{MB\_FC\_WRITE\_MULTIPLE\_REGISTERS}
+\}
+\end{DoxyCode}
+
+
+Definition at line 121 of file Modbus\-Rtu.\-h.
+

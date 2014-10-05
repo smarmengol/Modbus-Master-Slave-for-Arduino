@@ -1,0 +1,129 @@
+\hypertarget{class_modbus}{\section{Modbus Class Reference}
+\label{class_modbus}\index{Modbus@{Modbus}}
+}
+
+
+Arduino class library for communicating with \hyperlink{class_modbus}{Modbus} devices over U\-S\-B/\-R\-S232/485 (via R\-T\-U protocol).  
+
+
+
+
+{\ttfamily \#include $<$Modbus\-Rtu.\-h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__setup_ga101809cdd4734537bab58dc315a840b4}{Modbus} ()
+\begin{DoxyCompactList}\small\item\em Default Constructor for Master through Serial. \end{DoxyCompactList}\item 
+\hyperlink{class_modbus_afbbf7c81565d8e1ea1cd5890a96e7507}{Modbus} (uint8\-\_\-t u8id, uint8\-\_\-t u8serno)
+\item 
+\hyperlink{class_modbus_a5e23a7b669d0c2d5be1c0054c7c54dca}{Modbus} (uint8\-\_\-t u8id, uint8\-\_\-t u8serno, uint8\-\_\-t u8txenpin)
+\item 
+void \hyperlink{group__setup_ga475a4fa0fac491307b10c4529ad6d2a0}{begin} (long u32speed)
+\begin{DoxyCompactList}\small\item\em Initialize class object. \end{DoxyCompactList}\item 
+void \hyperlink{class_modbus_a4f9673a3d113c49af69cb87b030ef099}{begin} ()
+\item 
+void \hyperlink{group__setup_gaf828190ebe24efb1b3b1957429f3872e}{set\-Time\-Out} (uint16\-\_\-t u16timeout)
+\begin{DoxyCompactList}\small\item\em write communication watch-\/dog timer \end{DoxyCompactList}\item 
+uint16\-\_\-t \hyperlink{class_modbus_ac860024db3117a2ef907d0325b2fb7a1}{get\-Time\-Out} ()
+\begin{DoxyCompactList}\small\item\em get communication watch-\/dog timer value \end{DoxyCompactList}\item 
+boolean \hyperlink{group__loop_gaf6dd413191ed8a833022046873e0a063}{get\-Time\-Out\-State} ()
+\begin{DoxyCompactList}\small\item\em get communication watch-\/dog timer state \end{DoxyCompactList}\item 
+int8\-\_\-t \hyperlink{group__loop_ga19398cabed57b6d085d014af6c149f54}{query} (\hyperlink{structmodbus__t}{modbus\-\_\-t} telegram)
+\begin{DoxyCompactList}\small\item\em only for master \end{DoxyCompactList}\item 
+int8\-\_\-t \hyperlink{group__loop_ga53bde78490c1cd8e3c070a676bdcfb0d}{poll} ()
+\begin{DoxyCompactList}\small\item\em cyclic poll for master \end{DoxyCompactList}\item 
+int8\-\_\-t \hyperlink{group__loop_gab3ef20562fc8cee14fc85f7e276890b5}{poll} (uint16\-\_\-t $\ast$regs, uint8\-\_\-t u8size)
+\begin{DoxyCompactList}\small\item\em cyclic poll for slave \end{DoxyCompactList}\item 
+uint16\-\_\-t \hyperlink{group__buffer_ga4fa6ede8df85b7cc70b1282b9547378a}{get\-In\-Cnt} ()
+\begin{DoxyCompactList}\small\item\em number of incoming messages \end{DoxyCompactList}\item 
+uint16\-\_\-t \hyperlink{group__buffer_ga6f831ecaf3678c27dafb663a28bf81f0}{get\-Out\-Cnt} ()
+\begin{DoxyCompactList}\small\item\em number of outcoming messages \end{DoxyCompactList}\item 
+uint16\-\_\-t \hyperlink{group__buffer_ga6883c7f3ff12f084ed56d559d4e06ed0}{get\-Err\-Cnt} ()
+\begin{DoxyCompactList}\small\item\em error counter \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{group__setup_ga6449894306ff8cc5d4caff09b1b0d1ce}{get\-I\-D} ()
+\begin{DoxyCompactList}\small\item\em get slave I\-D between 1 and 247 \end{DoxyCompactList}\item 
+uint8\-\_\-t \hyperlink{group__buffer_ga2f39717d957a929af488c9120488fcdc}{get\-State} ()
+\item 
+uint8\-\_\-t \hyperlink{group__buffer_gace7f726db13adc8feeceab987b719531}{get\-Last\-Error} ()
+\begin{DoxyCompactList}\small\item\em get last error message \end{DoxyCompactList}\item 
+void \hyperlink{group__setup_ga9bd497e97ac1777d4f0d4171078d60e0}{set\-I\-D} (uint8\-\_\-t u8id)
+\begin{DoxyCompactList}\small\item\em write new I\-D for the slave \end{DoxyCompactList}\item 
+void \hyperlink{class_modbus_a0d80101b650344c712a085c4bb005c4c}{end} ()
+\begin{DoxyCompactList}\small\item\em finish any communication and release serial communication port \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Arduino class library for communicating with \hyperlink{class_modbus}{Modbus} devices over U\-S\-B/\-R\-S232/485 (via R\-T\-U protocol). 
+
+Definition at line 141 of file Modbus\-Rtu.\-h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_modbus_afbbf7c81565d8e1ea1cd5890a96e7507}{\index{Modbus@{Modbus}!Modbus@{Modbus}}
+\index{Modbus@{Modbus}!Modbus@{Modbus}}
+\subsubsection[{Modbus}]{\setlength{\rightskip}{0pt plus 5cm}Modbus\-::\-Modbus (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{u8id, }
+\item[{uint8\-\_\-t}]{u8serno}
+\end{DoxyParamCaption}
+)}}\label{class_modbus_afbbf7c81565d8e1ea1cd5890a96e7507}
+
+
+Definition at line 218 of file Modbus\-Rtu.\-h.
+
+\hypertarget{class_modbus_a5e23a7b669d0c2d5be1c0054c7c54dca}{\index{Modbus@{Modbus}!Modbus@{Modbus}}
+\index{Modbus@{Modbus}!Modbus@{Modbus}}
+\subsubsection[{Modbus}]{\setlength{\rightskip}{0pt plus 5cm}Modbus\-::\-Modbus (
+\begin{DoxyParamCaption}
+\item[{uint8\-\_\-t}]{u8id, }
+\item[{uint8\-\_\-t}]{u8serno, }
+\item[{uint8\-\_\-t}]{u8txenpin}
+\end{DoxyParamCaption}
+)}}\label{class_modbus_a5e23a7b669d0c2d5be1c0054c7c54dca}
+
+
+Definition at line 234 of file Modbus\-Rtu.\-h.
+
+
+
+\subsection{Member Function Documentation}
+\hypertarget{class_modbus_a4f9673a3d113c49af69cb87b030ef099}{\index{Modbus@{Modbus}!begin@{begin}}
+\index{begin@{begin}!Modbus@{Modbus}}
+\subsubsection[{begin}]{\setlength{\rightskip}{0pt plus 5cm}void Modbus\-::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_modbus_a4f9673a3d113c49af69cb87b030ef099}
+
+
+Definition at line 299 of file Modbus\-Rtu.\-h.
+
+\hypertarget{class_modbus_a0d80101b650344c712a085c4bb005c4c}{\index{Modbus@{Modbus}!end@{end}}
+\index{end@{end}!Modbus@{Modbus}}
+\subsubsection[{end}]{\setlength{\rightskip}{0pt plus 5cm}void Modbus\-::end (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_modbus_a0d80101b650344c712a085c4bb005c4c}
+
+
+finish any communication and release serial communication port 
+
+\hypertarget{class_modbus_ac860024db3117a2ef907d0325b2fb7a1}{\index{Modbus@{Modbus}!get\-Time\-Out@{get\-Time\-Out}}
+\index{get\-Time\-Out@{get\-Time\-Out}!Modbus@{Modbus}}
+\subsubsection[{get\-Time\-Out}]{\setlength{\rightskip}{0pt plus 5cm}uint16\-\_\-t Modbus\-::get\-Time\-Out (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{class_modbus_ac860024db3117a2ef907d0325b2fb7a1}
+
+
+get communication watch-\/dog timer value 
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{_modbus_rtu_8h}{Modbus\-Rtu.\-h}\end{DoxyCompactItemize}
