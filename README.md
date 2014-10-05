@@ -4,7 +4,7 @@ libmodbus is a library that provides a Serial Modbus implementation for Arduino.
 
 A primary goal was to enable industrial communication for the Arduino in order to link it to industrial devices such as HMIs, CNCs, PLCs, temperature regulators or speed drives.
 
-Library contents:
+LIBRARY CONTENTS
 =================================================================
 LICENSE.txt			GNU Licence file
 keywords.txt		Arduino IDE colouring syntax
@@ -44,3 +44,17 @@ NB : the library will be available to use in sketches, but examples for the libr
 KNOWN ISSUES
 =================================================================
 It is not compatible with ARDUINO LEONARDO and not tested under ARDUINO DUE and newer boards.
+
+TODO List
+=================================================================
+Common to Master and Slave:
+1) Implement other Serial settings: parity, stop bits, ...
+2) End frame delay, also known as T35
+3) Test it with several Arduino boards: UNO, Mega, etc..
+4) Extend it to Leonardo
+
+Master:
+1) Function code 1 and 2 still not implemented
+2) Function code 15 still not implement
+3) Other codes under development
+
