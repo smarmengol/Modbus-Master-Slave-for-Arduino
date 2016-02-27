@@ -1,8 +1,8 @@
 /**
- * @file 		ModbusRtu.h
- * @version     1.20
- * @date        2014.09.09
- * @author 		Samuel Marco i Armengol
+ * @file 	ModbusRtu.h
+ * @version     1.21
+ * @date        2016.02.21
+ * @author 	Samuel Marco i Armengol
  * @contact     sammarcoarmengol@gmail.com
  * @contribution 
  *
@@ -180,6 +180,7 @@ public:
   Modbus(uint8_t u8id, uint8_t u8serno); 
   Modbus(uint8_t u8id, uint8_t u8serno, uint8_t u8txenpin);
   void begin(long u32speed);
+  void begin(long u32speed, uint8_t u8config);
   void begin();
   void setTimeOut( uint16_t u16timeout); //!<write communication watch-dog timer
   uint16_t getTimeOut(); //!<get communication watch-dog timer value
@@ -248,7 +249,6 @@ Modbus::Modbus(uint8_t u8id, uint8_t u8serno, uint8_t u8txenpin) {
  * 
  * @see http://arduino.cc/en/Serial/Begin#.Uy4CJ6aKlHY
  * @param speed   baud rate, in standard increments (300..115200)
- * @param config  data frame settings (data length, parity and stop bits)
  * @ingroup setup
  */
 void Modbus::begin(long u32speed) {
@@ -277,8 +277,57 @@ void Modbus::begin(long u32speed) {
     break;
   }
 
-  // port->begin(u32speed, u8config);
   port->begin(u32speed);
+  if (u8txenpin > 1) { // pin 0 & pin 1 are reserved for RX/TX
+    // return RS485 transceiver to transmit mode
+    pinMode(u8txenpin, OUTPUT);
+    digitalWrite(u8txenpin, LOW);
+  }
+
+  port->flush();
+  u8lastRec = u8BufferSize = 0;
+  u16InCnt = u16OutCnt = u16errCnt = 0;
+}
+
+/**
+ * @brief
+ * Initialize class object.
+ * 
+ * Sets up the serial port using specified baud rate.
+ * Call once class has been instantiated, typically within setup().
+ * 
+ * @see http://arduino.cc/en/Serial/Begin#.Uy4CJ6aKlHY
+ * @param speed   baud rate, in standard increments (300..115200)
+ * @param config  data frame settings (data length, parity and stop bits)
+ * @ingroup setup
+ */
+void Modbus::begin(long u32speed,uint8_t u8config) {
+
+  switch( u8serno ) {
+#if defined(UBRR1H)
+  case 1:
+    port = &Serial1;
+    break;
+#endif
+
+#if defined(UBRR2H)
+  case 2:
+    port = &Serial2;
+    break;
+#endif
+
+#if defined(UBRR3H)
+  case 3:
+    port = &Serial3;
+    break;
+#endif
+  case 0:
+  default:
+    port = &Serial;
+    break;
+  }
+
+  port->begin(u32speed, u8config);
   if (u8txenpin > 1) { // pin 0 & pin 1 are reserved for RX/TX
     // return RS485 transceiver to transmit mode
     pinMode(u8txenpin, OUTPUT);
