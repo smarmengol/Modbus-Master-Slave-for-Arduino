@@ -4,6 +4,8 @@ libmodbus is a library that provides a Serial Modbus implementation for Arduino.
 
 A primary goal was to enable industrial communication for the Arduino in order to link it to industrial devices such as HMIs, CNCs, PLCs, temperature regulators or speed drives.
 
+now you can use software serial with the update from Helium6072!
+
 LIBRARY CONTENTS
 =================================================================
 LICENSE.txt			GNU Licence file
@@ -19,6 +21,7 @@ Sample sketches to implement miscellaneous settings:
 /examples/RS485_slave		Modbus slave adapted to the RS485 port
 /examples/simple_master		Modbus master node with a single query
 /examples/simple_slave		Modbus slave node with a link array
+/examples/software_serial_simple_master		Modbus master node that works via software serial
 
 INSTALLATION PROCEDURE
 =================================================================
@@ -65,3 +68,13 @@ Master:
 
 3) Other codes under development
 
+New features by Helium6072 29 July 2016
+=================================================================
+1) "port->flush();" changed into "while(port->read() >= 0);"
+
+Since Serial.flush() (port->flush(); in ModbusRtu.h line 287, 337, & 827) no longer empties incoming buffer on 1.6 (Arduino.cc : flush() "Waits for the transmission of outgoing serial data to complete. Prior to Arduino 1.0, this instead removed any buffered incoming serial data.), use "while(port->read() >= 0);" instead.
+
+2) software serial compatible
+
+New constructor Modbus::Modbus(uint8_t u8id) and method void Modbus::begin(SoftwareSerial *sPort, long u32speed) that makes using software serial possible.
+Check out sexample "software_serial_simple_master" and learn more!
