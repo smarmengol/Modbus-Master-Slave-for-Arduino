@@ -821,7 +821,7 @@ int8_t Modbus::poll( uint16_t *regs, uint8_t u8size )
 void Modbus::init(uint8_t u8id, uint8_t u8serno, uint8_t u8txenpin)
 {
     this->u8id = u8id;
-    this->u8serno = (u8serno > 3) ? 0 : u8serno;
+    this->u8serno = u8serno;
     this->u8txenpin = u8txenpin;
     this->u16timeOut = 1000;
 }
@@ -920,8 +920,9 @@ void Modbus::sendTxBuffer()
             break;
 #endif
         case 0:
-        default:
             UCSR0A=UCSR0A |(1 << TXC0);
+            break;
+        default:
             break;
         }
         digitalWrite( u8txenpin, HIGH );
@@ -956,9 +957,10 @@ void Modbus::sendTxBuffer()
             break;
 #endif
         case 0:
-        default:
             while (!(UCSR0A & (1 << TXC0)));
             break;
+        default:
+			break;
         }
 
         // return RS485 transceiver to receive mode
