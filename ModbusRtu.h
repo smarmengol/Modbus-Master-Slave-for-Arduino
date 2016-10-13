@@ -5,6 +5,7 @@
  * @author 	Samuel Marco i Armengol
  * @contact     sammarcoarmengol@gmail.com
  * @contribution Helium6072
+ * @contribution gabrielsan
  *
  * @description
  *  Arduino library for communicating with Modbus devices
@@ -896,73 +897,25 @@ void Modbus::sendTxBuffer()
     u8BufferSize++;
     au8Buffer[ u8BufferSize ] = u16crc & 0x00ff;
     u8BufferSize++;
-
-    // set RS485 transceiver to transmit mode
+	
     if (u8txenpin > 1)
     {
-        switch( u8serno )
-        {
-#if defined(UBRR1H)
-        case 1:
-            UCSR1A=UCSR1A |(1 << TXC1);
-            break;
-#endif
-
-#if defined(UBRR2H)
-        case 2:
-            UCSR2A=UCSR2A |(1 << TXC2);
-            break;
-#endif
-
-#if defined(UBRR3H)
-        case 3:
-            UCSR3A=UCSR3A |(1 << TXC3);
-            break;
-#endif
-        case 0:
-            UCSR0A=UCSR0A |(1 << TXC0);
-            break;
-        default:
-            break;
-        }
+        // set RS485 transceiver to transmit mode
         digitalWrite( u8txenpin, HIGH );
     }
 
     // transfer buffer to serial line
-    if(u8serno<4)
+    if (u8serno < 4)
         port->write( au8Buffer, u8BufferSize );
     else
         softPort->write( au8Buffer, u8BufferSize );
 
-    // keep RS485 transceiver in transmit mode as long as sending
     if (u8txenpin > 1)
     {
-        switch( u8serno )
-        {
-#if defined(UBRR1H)
-        case 1:
-            while (!(UCSR1A & (1 << TXC1)));
-            break;
-#endif
-
-#if defined(UBRR2H)
-        case 2:
-            while (!(UCSR2A & (1 << TXC2)));
-            break;
-#endif
-
-#if defined(UBRR3H)
-        case 3:
-            while (!(UCSR3A & (1 << TXC3)));
-            break;
-#endif
-        case 0:
-            while (!(UCSR0A & (1 << TXC0)));
-            break;
-        default:
-			break;
-        }
-
+        // must wait transmission end before changing pin state
+        // soft serial does not need it since it is blocking
+        if (u8serno < 4)
+            port->flush();
         // return RS485 transceiver to receive mode
         digitalWrite( u8txenpin, LOW );
     }
