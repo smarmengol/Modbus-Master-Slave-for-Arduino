@@ -498,7 +498,7 @@ void Modbus::setTimeOut( uint16_t u16timeOut)
  */
 boolean Modbus::getTimeOutState()
 {
-    return (millis() > u32timeOut);
+    return ((unsigned long)(millis() -u32timeOut) > (unsigned long)u16timeout);
 }
 
 /**
@@ -679,7 +679,7 @@ int8_t Modbus::poll()
     else
         u8current = softPort->available();
 
-    if (millis() > u32timeOut)
+    if ((unsigned long)(millis() -u32timeOut) > (unsigned long)u16timeout)
     {
         u8state = COM_IDLE;
         u8lastError = NO_REPLY;
@@ -693,10 +693,10 @@ int8_t Modbus::poll()
     if (u8current != u8lastRec)
     {
         u8lastRec = u8current;
-        u32time = millis() + T35;
+        u32time = millis();
         return 0;
     }
-    if (millis() < u32time) return 0;
+    if ((unsigned long)(millis() -u32time) > (unsigned long)T35) return 0;
 
     // transfer Serial buffer frame to auBuffer
     u8lastRec = 0;
@@ -775,10 +775,10 @@ int8_t Modbus::poll( uint16_t *regs, uint8_t u8size )
     if (u8current != u8lastRec)
     {
         u8lastRec = u8current;
-        u32time = millis() + T35;
+        u32time = millis();
         return 0;
     }
-    if (millis() < u32time) return 0;
+    if ((unsigned long)(millis() -u32time) > (unsigned long)T35) return 0;
 
     u8lastRec = 0;
     int8_t i8state = getRxBuffer();
@@ -801,7 +801,7 @@ int8_t Modbus::poll( uint16_t *regs, uint8_t u8size )
         return u8exception;
     }
 
-    u32timeOut = millis() + long(u16timeOut);
+    u32timeOut = millis();
     u8lastError = 0;
 
     // process message
@@ -947,7 +947,7 @@ void Modbus::sendTxBuffer()
     u8BufferSize = 0;
 
     // set time-out for master
-    u32timeOut = millis() + (unsigned long) u16timeOut;
+    u32timeOut = millis();
 
     // increase message counter
     u16OutCnt++;
