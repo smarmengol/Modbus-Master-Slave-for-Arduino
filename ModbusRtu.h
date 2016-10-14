@@ -168,7 +168,7 @@ private:
     uint16_t *au16regs;
     uint16_t u16InCnt, u16OutCnt, u16errCnt;
     uint16_t u16timeOut;
-    uint32_t u32time, u32timeOut;
+    uint32_t u32time, u32timeOut, u32overTime;
     uint8_t u8regsize;
 
     void init(uint8_t u8id, uint8_t u8serno, uint8_t u8txenpin);
@@ -195,7 +195,7 @@ public:
     Modbus(uint8_t u8id);
     void begin(long u32speed);
     void begin(SoftwareSerial *sPort, long u32speed);
-    void begin(long u32speed, uint8_t u8config);
+    //void begin(long u32speed, uint8_t u8config);
     void begin();
     void setTimeOut( uint16_t u16timeout); //!<write communication watch-dog timer
     uint16_t getTimeOut(); //!<get communication watch-dog timer value
@@ -210,6 +210,7 @@ public:
     uint8_t getState();
     uint8_t getLastError(); //!<get last error message
     void setID( uint8_t u8id ); //!<write new ID for the slave
+    void setTxendPinOverTime( uint32_t u32overTime );
     void end(); //!<finish any communication and release serial communication port
 };
 
@@ -373,7 +374,7 @@ void Modbus::begin(SoftwareSerial *sPort, long u32speed)
  * @param config  data frame settings (data length, parity and stop bits)
  * @ingroup setup
  */
-void Modbus::begin(long u32speed,uint8_t u8config)
+/* void Modbus::begin(long u32speed,uint8_t u8config)
 {
 
     switch( u8serno )
@@ -412,7 +413,7 @@ void Modbus::begin(long u32speed,uint8_t u8config)
     while(port->read() >= 0);
     u8lastRec = u8BufferSize = 0;
     u16InCnt = u16OutCnt = u16errCnt = 0;
-}
+} */
 
 /**
  * @brief
@@ -442,6 +443,21 @@ void Modbus::setID( uint8_t u8id)
     {
         this->u8id = u8id;
     }
+}
+
+/**
+ * @brief
+ * Method to write the overtime count for txend pin.
+ * It waits until count reaches 0 after the transfer is done.
+ * With this, you can extend the time between txempty and
+ * the falling edge if needed.
+ *
+ * @param 	uint32_t	overtime count for txend pin
+ * @ingroup setup
+ */
+void Modbus::setTxendPinOverTime( uint32_t u32overTime )
+{
+    this->u32overTime = u32overTime;
 }
 
 /**
@@ -825,6 +841,7 @@ void Modbus::init(uint8_t u8id, uint8_t u8serno, uint8_t u8txenpin)
     this->u8serno = u8serno;
     this->u8txenpin = u8txenpin;
     this->u16timeOut = 1000;
+    this->u32overTime = 0;
 }
 
 void Modbus::init(uint8_t u8id)
@@ -833,6 +850,7 @@ void Modbus::init(uint8_t u8id)
     this->u8serno = 4;
     this->u8txenpin = 0;
     this->u16timeOut = 1000;
+    this->u32overTime = 0;
 }
 
 /**
@@ -917,6 +935,8 @@ void Modbus::sendTxBuffer()
         if (u8serno < 4)
             port->flush();
         // return RS485 transceiver to receive mode
+        volatile uint32_t u32overTimeCountDown = u32overTime;
+        while ( u32overTimeCountDown-- > 0);
         digitalWrite( u8txenpin, LOW );
     }
     if(u8serno<4)
