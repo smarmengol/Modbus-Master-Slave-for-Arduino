@@ -197,7 +197,7 @@ public:
     void begin(SoftwareSerial *sPort, long u32speed);
     //void begin(long u32speed, uint8_t u8config);
     void begin();
-    void setTimeOut( uint16_t u16timeout); //!<write communication watch-dog timer
+    void setTimeOut( uint16_t u16timeOut); //!<write communication watch-dog timer
     uint16_t getTimeOut(); //!<get communication watch-dog timer value
     boolean getTimeOutState(); //!<get communication watch-dog timer state
     int8_t query( modbus_t telegram ); //!<only for master
@@ -498,7 +498,7 @@ void Modbus::setTimeOut( uint16_t u16timeOut)
  */
 boolean Modbus::getTimeOutState()
 {
-    return ((unsigned long)(millis() -u32timeOut) > (unsigned long)u16timeout);
+    return ((unsigned long)(millis() -u32timeOut) > (unsigned long)u16timeOut);
 }
 
 /**
@@ -679,7 +679,7 @@ int8_t Modbus::poll()
     else
         u8current = softPort->available();
 
-    if ((unsigned long)(millis() -u32timeOut) > (unsigned long)u16timeout)
+    if ((unsigned long)(millis() -u32timeOut) > (unsigned long)u16timeOut)
     {
         u8state = COM_IDLE;
         u8lastError = NO_REPLY;
