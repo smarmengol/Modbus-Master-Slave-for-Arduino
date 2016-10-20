@@ -696,7 +696,7 @@ int8_t Modbus::poll()
         u32time = millis();
         return 0;
     }
-    if ((unsigned long)(millis() -u32time) > (unsigned long)T35) return 0;
+    if ((unsigned long)(millis() -u32time) < (unsigned long)T35) return 0;
 
     // transfer Serial buffer frame to auBuffer
     u8lastRec = 0;
@@ -778,7 +778,7 @@ int8_t Modbus::poll( uint16_t *regs, uint8_t u8size )
         u32time = millis();
         return 0;
     }
-    if ((unsigned long)(millis() -u32time) > (unsigned long)T35) return 0;
+    if ((unsigned long)(millis() -u32time) < (unsigned long)T35) return 0;
 
     u8lastRec = 0;
     int8_t i8state = getRxBuffer();
