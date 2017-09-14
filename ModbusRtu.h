@@ -607,21 +607,27 @@ int8_t Modbus::query( modbus_t telegram )
 
         au8Buffer[ NB_HI ]      = highByte(telegram.u16CoilsNo );
         au8Buffer[ NB_LO ]      = lowByte( telegram.u16CoilsNo );
-        au8Buffer[ NB_LO+1 ]    = u8bytesno;
+        au8Buffer[ BYTE_CNT ]    = u8bytesno;
         u8BufferSize = 7;
 
-        u8regsno = u8bytesno = 0; // now auxiliary registers
-        for (uint16_t i = 0; i < telegram.u16CoilsNo; i++)
+        for (uint16_t i = 0; i < u8bytesno; i++)
         {
-
-
+            if(i%2)
+            {
+                au8Buffer[ u8BufferSize ] = lowByte( au16regs[ i/2 ] );
+            }
+            else
+            {
+                au8Buffer[ u8BufferSize ] = highByte( au16regs[ i/2] );
+            }          
+            u8BufferSize++;
         }
         break;
 
     case MB_FC_WRITE_MULTIPLE_REGISTERS:
         au8Buffer[ NB_HI ]      = highByte(telegram.u16CoilsNo );
         au8Buffer[ NB_LO ]      = lowByte( telegram.u16CoilsNo );
-        au8Buffer[ NB_LO+1 ]    = (uint8_t) ( telegram.u16CoilsNo * 2 );
+        au8Buffer[ BYTE_CNT ]    = (uint8_t) ( telegram.u16CoilsNo * 2 );
         u8BufferSize = 7;
 
         for (uint16_t i=0; i< telegram.u16CoilsNo; i++)
@@ -684,7 +690,7 @@ int8_t Modbus::poll()
     // transfer Serial buffer frame to auBuffer
     u8lastRec = 0;
     int8_t i8state = getRxBuffer();
-    if (i8state < 7)
+    if (i8state < 6) //7 was incorrect for functions 1 and 2 the smallest frame could be 6 bytes long
     {
         u8state = COM_IDLE;
         u16errCnt++;
@@ -1149,15 +1155,21 @@ void Modbus::buildException( uint8_t u8exception )
  */
 void Modbus::get_FC1()
 {
-    uint8_t u8byte, i;
-    u8byte = 0;
-
-    //  for (i=0; i< au8Buffer[ 2 ] /2; i++) {
-    //    au16regs[ i ] = word(
-    //    au8Buffer[ u8byte ],
-    //    au8Buffer[ u8byte +1 ]);
-    //    u8byte += 2;
-    //  }
+    uint8_t u8byte, i, maxI;
+    u8byte = 3;
+     for (i=0; i< au8Buffer[2]; i++) {
+        
+        if(i%2)
+        {
+            au16regs[i/2]= word(au8Buffer[i+u8byte], lowByte(au16regs[i/2]));
+        }
+        else
+        {
+           
+            au16regs[i/2]= word(highByte(au16regs[i/2]), au8Buffer[i+u8byte]); 
+        }
+        
+     }
 }
 
 /**
