@@ -1203,6 +1203,7 @@ int8_t Modbus::process_FC1( uint16_t *regs, uint8_t u8size )
     if (u16Coilno % 8 != 0) u8bytesno ++;
     au8Buffer[ ADD_HI ]  = u8bytesno;
     u8BufferSize         = ADD_LO;
+    au8Buffer[ u8BufferSize + u8bytesno - 1 ] = 0;
 
     // read each coil from the register map and put its value inside the outcoming message
     u8bitsno = 0;
