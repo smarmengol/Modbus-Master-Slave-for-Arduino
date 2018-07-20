@@ -659,6 +659,7 @@ int8_t Modbus::query( modbus_t telegram )
 
     sendTxBuffer();
     u8state = COM_WAITING;
+    u8lastError = 0;
     return 0;
 }
 
