@@ -914,8 +914,6 @@ int8_t Modbus::getRxBuffer()
  */
 void Modbus::sendTxBuffer()
 {
-    uint8_t i = 0;
-
     // append CRC to message
     uint16_t u16crc = calcCRC( u8BufferSize );
     au8Buffer[ u8BufferSize ] = u16crc >> 8;
@@ -1131,7 +1129,7 @@ void Modbus::buildException( uint8_t u8exception )
  */
 void Modbus::get_FC1()
 {
-    uint8_t u8byte, i, maxI;
+    uint8_t u8byte, i;
     u8byte = 3;
      for (i=0; i< au8Buffer[2]; i++) {
         
@@ -1176,7 +1174,7 @@ void Modbus::get_FC3()
  * @return u8BufferSize Response to master length
  * @ingroup discrete
  */
-int8_t Modbus::process_FC1( uint16_t *regs, uint8_t u8size )
+int8_t Modbus::process_FC1( uint16_t *regs, uint8_t /*u8size*/ )
 {
     uint8_t u8currentRegister, u8currentBit, u8bytesno, u8bitsno;
     uint8_t u8CopyBufferSize;
@@ -1230,7 +1228,7 @@ int8_t Modbus::process_FC1( uint16_t *regs, uint8_t u8size )
  * @return u8BufferSize Response to master length
  * @ingroup register
  */
-int8_t Modbus::process_FC3( uint16_t *regs, uint8_t u8size )
+int8_t Modbus::process_FC3( uint16_t *regs, uint8_t /*u8size*/ )
 {
 
     uint8_t u8StartAdd = word( au8Buffer[ ADD_HI ], au8Buffer[ ADD_LO ] );
@@ -1262,7 +1260,7 @@ int8_t Modbus::process_FC3( uint16_t *regs, uint8_t u8size )
  * @return u8BufferSize Response to master length
  * @ingroup discrete
  */
-int8_t Modbus::process_FC5( uint16_t *regs, uint8_t u8size )
+int8_t Modbus::process_FC5( uint16_t *regs, uint8_t /*u8size*/ )
 {
     uint8_t u8currentRegister, u8currentBit;
     uint8_t u8CopyBufferSize;
@@ -1295,7 +1293,7 @@ int8_t Modbus::process_FC5( uint16_t *regs, uint8_t u8size )
  * @return u8BufferSize Response to master length
  * @ingroup register
  */
-int8_t Modbus::process_FC6( uint16_t *regs, uint8_t u8size )
+int8_t Modbus::process_FC6( uint16_t *regs, uint8_t /*u8size*/ )
 {
 
     uint8_t u8add = word( au8Buffer[ ADD_HI ], au8Buffer[ ADD_LO ] );
@@ -1321,7 +1319,7 @@ int8_t Modbus::process_FC6( uint16_t *regs, uint8_t u8size )
  * @return u8BufferSize Response to master length
  * @ingroup discrete
  */
-int8_t Modbus::process_FC15( uint16_t *regs, uint8_t u8size )
+int8_t Modbus::process_FC15( uint16_t *regs, uint8_t /*u8size*/ )
 {
     uint8_t u8currentRegister, u8currentBit, u8frameByte, u8bitsno;
     uint8_t u8CopyBufferSize;
@@ -1377,9 +1375,8 @@ int8_t Modbus::process_FC15( uint16_t *regs, uint8_t u8size )
  * @return u8BufferSize Response to master length
  * @ingroup register
  */
-int8_t Modbus::process_FC16( uint16_t *regs, uint8_t u8size )
+int8_t Modbus::process_FC16( uint16_t *regs, uint8_t /*u8size*/ )
 {
-    uint8_t u8func = au8Buffer[ FUNC ];  // get the original FUNC code
     uint8_t u8StartAdd = au8Buffer[ ADD_HI ] << 8 | au8Buffer[ ADD_LO ];
     uint8_t u8regsno = au8Buffer[ NB_HI ] << 8 | au8Buffer[ NB_LO ];
     uint8_t u8CopyBufferSize;
