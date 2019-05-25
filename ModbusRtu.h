@@ -195,6 +195,7 @@ public:
     Modbus(uint8_t u8id);
     void begin(long u32speed);
     void begin(SoftwareSerial *sPort, long u32speed);
+	void begin(SoftwareSerial *sPort, long u32speed, uint8_t u8txenpin);
     //void begin(long u32speed, uint8_t u8config);
     void begin();
     void setTimeOut( uint16_t u16timeOut); //!<write communication watch-dog timer
@@ -339,13 +340,45 @@ void Modbus::begin(long u32speed)
  * Sets up the software serial port using specified baud rate and SoftwareSerial object.
  * Call once class has been instantiated, typically within setup().
  *
- * @param speed   *softPort, pointer to SoftwareSerial class object
- * @param speed   baud rate, in standard increments (300..115200)
+ * @param sPort   *softPort, pointer to SoftwareSerial class object
+ * @param u32speed   baud rate, in standard increments (300..115200)
  * @ingroup setup
  */
 void Modbus::begin(SoftwareSerial *sPort, long u32speed)
 {
 
+    softPort=sPort;
+
+    softPort->begin(u32speed);
+
+    if (u8txenpin > 1)   // pin 0 & pin 1 are reserved for RX/TX
+    {
+        // return RS485 transceiver to transmit mode
+        pinMode(u8txenpin, OUTPUT);
+        digitalWrite(u8txenpin, LOW);
+    }
+
+    while(softPort->read() >= 0);
+    u8lastRec = u8BufferSize = 0;
+    u16InCnt = u16OutCnt = u16errCnt = 0;
+}
+
+/**
+ * @brief
+ * Initialize class object.
+ *
+ * Sets up the software serial port using specified baud rate and SoftwareSerial object.
+ * Call once class has been instantiated, typically within setup().
+ *
+ * @param *sPort     pointer to SoftwareSerial class object
+ * @param u32speed   baud rate, in standard increments (300..115200)
+ * @param u8txenpin  pin for txen RS-485 (=0 means USB/RS232C mode)
+ * @ingroup setup
+ */
+void Modbus::begin(SoftwareSerial *sPort, long u32speed, uint8_t u8txenpin)
+{
+
+	this->u8txenpin=u8txenpin;
     softPort=sPort;
 
     softPort->begin(u32speed);
@@ -914,8 +947,6 @@ int8_t Modbus::getRxBuffer()
  */
 void Modbus::sendTxBuffer()
 {
-    uint8_t i = 0;
-
     // append CRC to message
     uint16_t u16crc = calcCRC( u8BufferSize );
     au8Buffer[ u8BufferSize ] = u16crc >> 8;
@@ -1131,7 +1162,7 @@ void Modbus::buildException( uint8_t u8exception )
  */
 void Modbus::get_FC1()
 {
-    uint8_t u8byte, i, maxI;
+    uint8_t u8byte, i;
     u8byte = 3;
      for (i=0; i< au8Buffer[2]; i++) {
         
@@ -1176,7 +1207,7 @@ void Modbus::get_FC3()
  * @return u8BufferSize Response to master length
  * @ingroup discrete
  */
-int8_t Modbus::process_FC1( uint16_t *regs, uint8_t u8size )
+int8_t Modbus::process_FC1( uint16_t *regs, uint8_t /*u8size*/ )
 {
     uint8_t u8currentRegister, u8currentBit, u8bytesno, u8bitsno;
     uint8_t u8CopyBufferSize;
@@ -1230,7 +1261,7 @@ int8_t Modbus::process_FC1( uint16_t *regs, uint8_t u8size )
  * @return u8BufferSize Response to master length
  * @ingroup register
  */
-int8_t Modbus::process_FC3( uint16_t *regs, uint8_t u8size )
+int8_t Modbus::process_FC3( uint16_t *regs, uint8_t /*u8size*/ )
 {
 
     uint8_t u8StartAdd = word( au8Buffer[ ADD_HI ], au8Buffer[ ADD_LO ] );
@@ -1262,7 +1293,7 @@ int8_t Modbus::process_FC3( uint16_t *regs, uint8_t u8size )
  * @return u8BufferSize Response to master length
  * @ingroup discrete
  */
-int8_t Modbus::process_FC5( uint16_t *regs, uint8_t u8size )
+int8_t Modbus::process_FC5( uint16_t *regs, uint8_t /*u8size*/ )
 {
     uint8_t u8currentRegister, u8currentBit;
     uint8_t u8CopyBufferSize;
@@ -1295,7 +1326,7 @@ int8_t Modbus::process_FC5( uint16_t *regs, uint8_t u8size )
  * @return u8BufferSize Response to master length
  * @ingroup register
  */
-int8_t Modbus::process_FC6( uint16_t *regs, uint8_t u8size )
+int8_t Modbus::process_FC6( uint16_t *regs, uint8_t /*u8size*/ )
 {
 
     uint8_t u8add = word( au8Buffer[ ADD_HI ], au8Buffer[ ADD_LO ] );
@@ -1321,7 +1352,7 @@ int8_t Modbus::process_FC6( uint16_t *regs, uint8_t u8size )
  * @return u8BufferSize Response to master length
  * @ingroup discrete
  */
-int8_t Modbus::process_FC15( uint16_t *regs, uint8_t u8size )
+int8_t Modbus::process_FC15( uint16_t *regs, uint8_t /*u8size*/ )
 {
     uint8_t u8currentRegister, u8currentBit, u8frameByte, u8bitsno;
     uint8_t u8CopyBufferSize;
@@ -1377,9 +1408,8 @@ int8_t Modbus::process_FC15( uint16_t *regs, uint8_t u8size )
  * @return u8BufferSize Response to master length
  * @ingroup register
  */
-int8_t Modbus::process_FC16( uint16_t *regs, uint8_t u8size )
+int8_t Modbus::process_FC16( uint16_t *regs, uint8_t /*u8size*/ )
 {
-    uint8_t u8func = au8Buffer[ FUNC ];  // get the original FUNC code
     uint8_t u8StartAdd = au8Buffer[ ADD_HI ] << 8 | au8Buffer[ ADD_LO ];
     uint8_t u8regsno = au8Buffer[ NB_HI ] << 8 | au8Buffer[ NB_LO ];
     uint8_t u8CopyBufferSize;
