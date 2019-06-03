@@ -41,6 +41,9 @@
  This example code is in the public domain.
  */
 
+// Must set this macro to 1 *before* including ModbusRtu.h header.
+#define USE_SOFTWARE_SERIAL 1
+
 #include <ModbusRtu.h>
 #include <SoftwareSerial.h>
 
