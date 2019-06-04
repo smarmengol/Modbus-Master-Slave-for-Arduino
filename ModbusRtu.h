@@ -40,18 +40,7 @@
 
 #include <inttypes.h>
 #include "Arduino.h"
-#include "Print.h"
 
-// Define USE_SOFTWARE_SERIAL as 1, in order to use SoftwareSerial.
-// (You cannot use both hardware and software Serial implementations
-//  at the same time.)
-#if !defined(USE_SOFTWARE_SERIAL)
-#  define USE_SOFTWARE_SERIAL 0
-#endif
-
-#if (USE_SOFTWARE_SERIAL!=0)
-#  include <SoftwareSerial.h>
-#endif
 
 /**
  * @struct modbus_t
@@ -165,13 +154,9 @@ const unsigned char fctsupported[] =
 class Modbus
 {
 private:
-#if (USE_SOFTWARE_SERIAL==0)
-    HardwareSerial *port; //!< Pointer to Serial class object
-#else
-    SoftwareSerial *port; //!< Pointer to SoftwareSerial class object
-#endif
+    Stream *port; //!< Pointer to Stream class object (Either HardwareSerial or SoftwareSerial)
     uint8_t u8id; //!< 0=master, 1..247=slave number
-    uint8_t u8txenpin; //!< flow control pin: 0=USB or RS-232 mode, >0=RS-485 mode
+    uint8_t u8txenpin; //!< flow control pin: 0=USB or RS-232 mode, >1=RS-485 mode
     uint8_t u8state;
     uint8_t u8lastError;
     uint8_t au8Buffer[MAX_BUFFER];
@@ -199,12 +184,20 @@ private:
     void buildException( uint8_t u8exception ); // build exception message
 
 public:
+    template<typename T_Stream>
+    Modbus(uint8_t u8id, T_Stream& port, uint8_t u8txenpin);
+
     Modbus(uint8_t u8id=0, uint8_t u8serno=0, uint8_t u8txenpin=0);
-#if (USE_SOFTWARE_SERIAL!=0)
-    void begin(SoftwareSerial *sPort, long u32speed);
-    void begin(SoftwareSerial *sPort, long u32speed, uint8_t u8txenpin);
-#endif
+    void start();
+
+    template<typename T_Stream>
+    void begin(T_Stream* port_, long u32speed_);
+
+    template<typename T_Stream>
+    void begin(T_Stream* port_, long u32speed_, uint8_t u8txenpin_);
+
     void begin(long u32speed = 19200);
+
     void setTimeOut( uint16_t u16timeOut); //!<write communication watch-dog timer
     uint16_t getTimeOut(); //!<get communication watch-dog timer value
     boolean getTimeOutState(); //!<get communication watch-dog timer state
@@ -228,6 +221,40 @@ public:
  * @brief
  * Constructor for a Master/Slave.
  *
+ * For hardware serial through USB/RS232C/RS485 set port to Serial, Serial1,
+ * Serial2, or Serial3. (Numbered hardware serial ports are only available on
+ * some boards.)
+ *
+ * For software serial through RS232C/RS485 set port to a SoftwareSerial object
+ * that you have already constructed.
+ *
+ * ModbusRtu needs a pin for flow control only for RS485 mode. Pins 0 and 1
+ * cannot be used.
+ *
+ * First call begin() on your serial port, and then start up ModbusRtu by
+ * calling start(). You can choose the line speed and other port parameters
+ * by passing the appropriate values to the port's begin() function.
+ *
+ * @param u8id   node address 0=master, 1..247=slave
+ * @param port   serial port used
+ * @param u8txenpin pin for txen RS-485 (=0 means USB/RS232C mode)
+ * @ingroup setup
+ */
+template<typename T_Stream>
+Modbus::Modbus(uint8_t u8id, T_Stream& port, uint8_t u8txenpin)
+{
+    this->port = &port;
+    this->u8id = u8id;
+    this->u8txenpin = u8txenpin;
+    this->u16timeOut = 1000;
+    this->u32overTime = 0;
+}
+
+
+/**
+ * @brief
+ * Constructor for a Master/Slave.
+ *
  * For hardware serial through USB/RS232C/RS485 set u8serno to 0..3.
  * It needs a pin for flow control only for RS485 mode
  *
@@ -240,9 +267,7 @@ public:
  * @param u8serno  serial port used 0..3 (ignored for software serial)
  * @param u8txenpin pin for txen RS-485 (=0 means USB/RS232C mode)
  * @ingroup setup
- * @overload Modbus::Modbus(uint8_t u8id, uint8_t u8serno, uint8_t u8txenpin)
- * @overload Modbus::Modbus(uint8_t u8id)
- * @overload Modbus::Modbus()
+ * @overload Modbus::Modbus(uint8_t u8id, T_Stream& port, uint8_t u8txenpin)
  */
 Modbus::Modbus(uint8_t u8id, uint8_t u8serno, uint8_t u8txenpin)
 {
@@ -250,12 +275,6 @@ Modbus::Modbus(uint8_t u8id, uint8_t u8serno, uint8_t u8txenpin)
     this->u8txenpin = u8txenpin;
     this->u16timeOut = 1000;
     this->u32overTime = 0;
-
-#if (USE_SOFTWARE_SERIAL!=0)
-
-    (void)u8serno; // Suppress warning about unused parameter.
-
-#else
 
     switch( u8serno )
     {
@@ -281,66 +300,22 @@ Modbus::Modbus(uint8_t u8id, uint8_t u8serno, uint8_t u8txenpin)
         port = &Serial;
         break;
     }
-
-#endif // USE_SOFTWARE_SERIAL
-}
-
-
-#if (USE_SOFTWARE_SERIAL!=0)
-
-/**
- * @brief
- * Initialize class object.
- *
- * Sets up the software serial port using specified baud rate and SoftwareSerial object.
- * Call once class has been instantiated, typically within setup().
- *
- * @param sPort   *softPort, pointer to SoftwareSerial class object
- * @param u32speed   baud rate, in standard increments (300..115200)
- * @ingroup setup
- */
-void Modbus::begin(SoftwareSerial *sPort, long u32speed)
-{
-    port = sPort;
-    begin(u32speed);
 }
 
 
 /**
  * @brief
- * Initialize class object.
+ * Start-up class object.
  *
- * Sets up the software serial port using specified baud rate and SoftwareSerial object.
- * Call once class has been instantiated, typically within setup().
+ * Call this AFTER calling begin() on the serial port, typically within setup().
  *
- * @param *sPort     pointer to SoftwareSerial class object
- * @param u32speed   baud rate, in standard increments (300..115200)
- * @param u8txenpin  pin for txen RS-485 (=0 means USB/RS232C mode)
+ * (If you call this function, then you should NOT call any of
+ * ModbusRtu's own begin() functions.)
+ *
  * @ingroup setup
  */
-void Modbus::begin(SoftwareSerial *sPort, long u32speed, uint8_t u8txenpin)
+void Modbus::start()
 {
-    this->u8txenpin = u8txenpin;
-    begin(sPort, u32speed);
-}
-
-#endif // USE_SOFTWARE_SERIAL
-
-
-/**
- * @brief
- * Initialize class object.
- *
- * Sets up the serial port using specified baud rate.
- * Call once class has been instantiated, typically within setup().
- *
- * @see http://arduino.cc/en/Serial/Begin#.Uy4CJ6aKlHY
- * @param speed   baud rate, in standard increments (300..115200). Default=19200
- * @ingroup setup
- */
-void Modbus::begin(long u32speed)
-{
-    port->begin(u32speed);
     if (u8txenpin > 1)   // pin 0 & pin 1 are reserved for RX/TX
     {
         // return RS485 transceiver to transmit mode
@@ -351,6 +326,67 @@ void Modbus::begin(long u32speed)
     while(port->read() >= 0);
     u8lastRec = u8BufferSize = 0;
     u16InCnt = u16OutCnt = u16errCnt = 0;
+}
+
+
+/**
+ * @brief
+ * Install a serial port into ModbusRtu, begin() it, and start ModbusRtu.
+ *
+ * Sets up the software serial port using specified baud rate and SoftwareSerial object.
+ * Call once class has been instantiated, typically within setup().
+ *
+ * @param install_port pointer to SoftwareSerial or HardwareSerial class object
+ * @param u32speed     baud rate, in standard increments (300..115200)
+ * @ingroup setup
+ */
+template<typename T_Stream>
+void Modbus::begin(T_Stream* install_port, long u32speed)
+{
+    port = install_port;
+    install_port->begin(u32speed);
+    start();
+}
+
+
+/**
+ * @brief
+ * Install a serial port into ModbusRtu, begin() it, and start ModbusRtu.
+ *
+ * Sets up the software serial port using specified baud rate and SoftwareSerial object.
+ * Call once class has been instantiated, typically within setup().
+ *
+ * @param install_port  pointer to SoftwareSerial or HardwareSerial class object
+ * @param u32speed      baud rate, in standard increments (300..115200)
+ * @param u8txenpin     pin for txen RS-485 (=0 means USB/RS232C mode)
+ * @ingroup setup
+ */
+template<typename T_Stream>
+void Modbus::begin(T_Stream* install_port, long u32speed, uint8_t u8txenpin)
+{
+    this->u8txenpin = u8txenpin;
+    this->port = install_port;
+    install_port->begin(u32speed);
+    start();
+}
+
+
+/**
+ * @brief
+ * begin() hardware serial port and start ModbusRtu.
+ *
+ * Sets up the HardwareSerial port using specified baud rate.
+ * Call once class has been instantiated, typically within setup().
+ *
+ * @see http://arduino.cc/en/Serial/Begin#.Uy4CJ6aKlHY
+ * @param speed   baud rate, in standard increments (300..115200). Default=19200
+ * @ingroup setup
+ */
+void Modbus::begin(long u32speed)
+{
+    // !!Can ONLY do this if port ACTUALLY IS a HardwareSerial object!!
+    static_cast<HardwareSerial*>(port)->begin(u32speed);
+    start();
 }
 
 
@@ -823,11 +859,11 @@ void Modbus::sendTxBuffer()
 
     if (u8txenpin > 1)
     {
-#if (USE_SOFTWARE_SERIAL==0)
         // must wait transmission end before changing pin state
         // soft serial does not need it since it is blocking
+        // ...but the implementation in SoftwareSerial does nothing
+        // anyway, so no harm in calling it.
         port->flush();
-#endif
         // return RS485 transceiver to receive mode
         volatile uint32_t u32overTimeCountDown = u32overTime;
         while ( u32overTimeCountDown-- > 0);

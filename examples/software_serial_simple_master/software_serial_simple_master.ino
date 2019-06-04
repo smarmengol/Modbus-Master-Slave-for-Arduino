@@ -41,15 +41,14 @@
  This example code is in the public domain.
  */
 
-// Must set this macro to 1 *before* including ModbusRtu.h header.
-#define USE_SOFTWARE_SERIAL 1
-
 #include <ModbusRtu.h>
 #include <SoftwareSerial.h>
 
 // data array for modbus network sharing
 uint16_t au16data[16];
 uint8_t u8state;
+
+SoftwareSerial mySerial(3, 5);//Create a SoftwareSerial object so that we can use software serial. Search "software serial" on Arduino.cc to find out more details.
 
 /**
  *  Modbus object declaration
@@ -58,7 +57,7 @@ uint8_t u8state;
  *  u8txenpin : 0 for RS-232 and USB-FTDI 
  *               or any pin number > 1 for RS-485
  */
-Modbus master(0); // this is master and RS-232 or USB-FTDI via software serial
+Modbus master(0, mySerial); // this is master and RS-232 or USB-FTDI via software serial
 
 /**
  * This is an structe which contains a query to an slave device
@@ -67,11 +66,9 @@ modbus_t telegram;
 
 unsigned long u32wait;
 
-SoftwareSerial mySerial(3, 5);//Create a SoftwareSerial object so that we can use software serial. Search "software serial" on Arduino.cc to find out more details.
-
 void setup() {
   Serial.begin(9600);//use the hardware serial if you want to connect to your computer via usb cable, etc.
-  master.begin( &mySerial, 9600 ); // begin the ModBus object. The first parameter is the address of your SoftwareSerial address. Do not forget the "&". 9600 means baud-rate at 9600
+  master.start(); // start the ModBus object.
   master.setTimeOut( 2000 ); // if there is no answer in 2000 ms, roll over
   u32wait = millis() + 1000;
   u8state = 0; 
