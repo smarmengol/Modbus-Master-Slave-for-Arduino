@@ -184,8 +184,7 @@ private:
     void buildException( uint8_t u8exception ); // build exception message
 
 public:
-    template<typename T_Stream>
-    Modbus(uint8_t u8id, T_Stream& port, uint8_t u8txenpin =0);
+    Modbus(uint8_t u8id, Stream& port, uint8_t u8txenpin =0);
 
     void start();
     void setTimeOut( uint16_t u16timeOut); //!<write communication watch-dog timer
@@ -247,8 +246,7 @@ public:
  * @param u8txenpin pin for txen RS-485 (=0 means USB/RS232C mode)
  * @ingroup setup
  */
-template<typename T_Stream>
-Modbus::Modbus(uint8_t u8id, T_Stream& port, uint8_t u8txenpin)
+Modbus::Modbus(uint8_t u8id, Stream& port, uint8_t u8txenpin)
 {
     this->port = &port;
     this->u8id = u8id;
