@@ -23,11 +23,11 @@ uint8_t u8state;
 /**
  *  Modbus object declaration
  *  u8id : node id = 0 for master, = 1..247 for slave
- *  u8serno : serial port (use 0 for Serial)
+ *  port : serial port
  *  u8txenpin : 0 for RS-232 and USB-FTDI 
  *               or any pin number > 1 for RS-485
  */
-Modbus master(0,0,0); // this is master and RS-232 or USB-FTDI
+Modbus master(0,Serial,0); // this is master and RS-232 or USB-FTDI
 
 /**
  * This is an structe which contains a query to an slave device
@@ -37,7 +37,8 @@ modbus_t telegram;
 unsigned long u32wait;
 
 void setup() {
-  master.begin( 19200 ); // baud-rate at 19200
+  Serial.begin( 19200 ); // baud-rate at 19200
+  master.start();
   master.setTimeOut( 2000 ); // if there is no answer in 2000 ms, roll over
   u32wait = millis() + 1000;
   u8state = 0; 

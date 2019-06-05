@@ -53,7 +53,7 @@ SoftwareSerial mySerial(3, 5);//Create a SoftwareSerial object so that we can us
 /**
  *  Modbus object declaration
  *  u8id : node id = 0 for master, = 1..247 for slave
- *  u8serno : serial port (use 0 for Serial)
+ *  port : serial port
  *  u8txenpin : 0 for RS-232 and USB-FTDI 
  *               or any pin number > 1 for RS-485
  */
@@ -67,7 +67,7 @@ modbus_t telegram;
 unsigned long u32wait;
 
 void setup() {
-  Serial.begin(9600);//use the hardware serial if you want to connect to your computer via usb cable, etc.
+  mySerial.begin(9600);//use the hardware serial if you want to connect to your computer via usb cable, etc.
   master.start(); // start the ModBus object.
   master.setTimeOut( 2000 ); // if there is no answer in 2000 ms, roll over
   u32wait = millis() + 1000;

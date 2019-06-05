@@ -19,14 +19,15 @@ uint16_t au16data[16] = {
 /**
  *  Modbus object declaration
  *  u8id : node id = 0 for master, = 1..247 for slave
- *  u8serno : serial port (use 0 for Serial)
+ *  port : serial port
  *  u8txenpin : 0 for RS-232 and USB-FTDI 
  *               or any pin number > 1 for RS-485
  */
-Modbus slave(1,0,TXEN); // this is slave @1 and RS-485
+Modbus slave(1,Serial,TXEN); // this is slave @1 and RS-485
 
 void setup() {
-  slave.begin( 19200 ); // baud-rate at 19200
+  Serial.begin( 19200 ); // baud-rate at 19200
+  slave.start();
 }
 
 void loop() {
