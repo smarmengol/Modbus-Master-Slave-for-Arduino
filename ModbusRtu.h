@@ -185,7 +185,7 @@ private:
 
 public:
     template<typename T_Stream>
-    Modbus(uint8_t u8id, T_Stream& port, uint8_t u8txenpin);
+    Modbus(uint8_t u8id, T_Stream& port, uint8_t u8txenpin =0);
 
     void start();
     void setTimeOut( uint16_t u16timeOut); //!<write communication watch-dog timer
