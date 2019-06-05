@@ -187,17 +187,7 @@ public:
     template<typename T_Stream>
     Modbus(uint8_t u8id, T_Stream& port, uint8_t u8txenpin);
 
-    Modbus(uint8_t u8id=0, uint8_t u8serno=0, uint8_t u8txenpin=0);
     void start();
-
-    template<typename T_Stream>
-    void begin(T_Stream* port_, long u32speed_);
-
-    template<typename T_Stream>
-    void begin(T_Stream* port_, long u32speed_, uint8_t u8txenpin_);
-
-    void begin(long u32speed = 19200);
-
     void setTimeOut( uint16_t u16timeOut); //!<write communication watch-dog timer
     uint16_t getTimeOut(); //!<get communication watch-dog timer value
     boolean getTimeOutState(); //!<get communication watch-dog timer state
@@ -213,6 +203,23 @@ public:
     void setID( uint8_t u8id ); //!<write new ID for the slave
     void setTxendPinOverTime( uint32_t u32overTime );
     void end(); //!<finish any communication and release serial communication port
+
+    //
+    // Deprecated functions
+
+    // Deprecated: Use constructor: "Modbus m(0,Serial,0)" instead.
+    Modbus(uint8_t u8id=0, uint8_t u8serno=0, uint8_t u8txenpin=0) __attribute__((deprecated));
+
+    // Deprecated: Use "start()" instead.
+    template<typename T_Stream>
+    void begin(T_Stream* port_, long u32speed_) __attribute__((deprecated));
+
+    // Deprecated: Use "start()" instead.
+    template<typename T_Stream>
+    void begin(T_Stream* port_, long u32speed_, uint8_t u8txenpin_) __attribute__((deprecated));
+
+    // Deprecated: Use "start()" instead.
+    void begin(long u32speed = 19200) __attribute__((deprecated));
 };
 
 /* _____PUBLIC FUNCTIONS_____________________________________________________ */
@@ -253,15 +260,10 @@ Modbus::Modbus(uint8_t u8id, T_Stream& port, uint8_t u8txenpin)
 
 /**
  * @brief
- * Constructor for a Master/Slave.
+ * DEPRECATED constructor for a Master/Slave.
  *
- * For hardware serial through USB/RS232C/RS485 set u8serno to 0..3.
- * It needs a pin for flow control only for RS485 mode
- *
- * For software serial through RS232C/RS485 u8serno is ignored.
- * It needs a pin for flow control only for RS485 mode
- * If you use software serial you have to begin ModBus object by
- * using "void Modbus::begin(SoftwareSerial *softPort, long u32speed)".
+ * THIS CONSTRUCTOR IS ONLY PROVIDED FOR BACKWARDS COMPATIBILITY.
+ * USE Modbus(uint8_t, T_Stream&, uint8_t) INSTEAD.
  *
  * @param u8id   node address 0=master, 1..247=slave
  * @param u8serno  serial port used 0..3 (ignored for software serial)
@@ -331,10 +333,10 @@ void Modbus::start()
 
 /**
  * @brief
- * Install a serial port into ModbusRtu, begin() it, and start ModbusRtu.
+ * DEPRECATED Install a serial port, begin() it, and start ModbusRtu.
  *
- * Sets up the software serial port using specified baud rate and SoftwareSerial object.
- * Call once class has been instantiated, typically within setup().
+ * ONLY PROVIDED FOR BACKWARDS COMPATIBILITY.
+ * USE Serial.begin(<baud rate>); FOLLOWED BY Modbus.start() INSTEAD.
  *
  * @param install_port pointer to SoftwareSerial or HardwareSerial class object
  * @param u32speed     baud rate, in standard increments (300..115200)
@@ -351,10 +353,10 @@ void Modbus::begin(T_Stream* install_port, long u32speed)
 
 /**
  * @brief
- * Install a serial port into ModbusRtu, begin() it, and start ModbusRtu.
+ * DEPRECATED. Install a serial port, begin() it, and start ModbusRtu.
  *
- * Sets up the software serial port using specified baud rate and SoftwareSerial object.
- * Call once class has been instantiated, typically within setup().
+ * ONLY PROVIDED FOR BACKWARDS COMPATIBILITY.
+ * USE Serial.begin(<baud rate>); FOLLOWED BY Modbus.start() INSTEAD.
  *
  * @param install_port  pointer to SoftwareSerial or HardwareSerial class object
  * @param u32speed      baud rate, in standard increments (300..115200)
@@ -373,10 +375,10 @@ void Modbus::begin(T_Stream* install_port, long u32speed, uint8_t u8txenpin)
 
 /**
  * @brief
- * begin() hardware serial port and start ModbusRtu.
+ * DEPRECATED. begin() hardware serial port and start ModbusRtu.
  *
- * Sets up the HardwareSerial port using specified baud rate.
- * Call once class has been instantiated, typically within setup().
+ * ONLY PROVIDED FOR BACKWARDS COMPATIBILITY.
+ * USE Serial.begin(<baud rate>); FOLLOWED BY Modbus.start() INSTEAD.
  *
  * @see http://arduino.cc/en/Serial/Begin#.Uy4CJ6aKlHY
  * @param speed   baud rate, in standard increments (300..115200). Default=19200
