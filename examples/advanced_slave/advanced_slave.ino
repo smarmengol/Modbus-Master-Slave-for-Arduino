@@ -14,7 +14,7 @@
 #define ID   1
 
 //Crear instancia
-Modbus slave(ID, 0, 0); //ID del nodo. 0 para el master, 1-247 para esclavo
+Modbus slave(ID, Serial, 0); //ID del nodo. 0 para el master, 1-247 para esclavo
                         //Puerto serie (0 = TX: 1 - RX: 0)
                         //Protocolo serie. 0 para RS-232 + USB (default), cualquier pin mayor a 1 para RS-485
 boolean led;
@@ -29,7 +29,8 @@ uint16_t au16data[9]; //La tabla de registros que se desea compartir por la red
 void setup() {
   io_setup(); //configura las entradas y salidas
 
-  slave.begin(19200); //Abre la comunicación como esclavo
+  Serial.begin(19200); //Abre la comunicación como esclavo
+  slave.start();
   tempus = millis() + 100; //Guarda el tiempo actual + 100ms
   digitalWrite(13, HIGH ); //Prende el led del pin 13 (el de la placa)
 }
